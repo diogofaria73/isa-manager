@@ -1,0 +1,8 @@
+node_modules
+src/config/database.js/
+src/temp/uploads/
+.env
+
+
+netstat -ano | findstr :port
+taskkill /PID xxxx /F
