@@ -1,19 +1,17 @@
 import Sequelize, { Model } from 'sequelize';
 
-class Equipment extends Model {
+class EquipmentType extends Model {
   static init(sequelize) {
     super.init(
       {
         name: Sequelize.STRING,
-        type: Sequelize.STRING,
-        area: Sequelize.STRING,
-        working: Sequelize.BOOLEAN,
       },
       {
         sequelize,
       }
     );
+    return this;
   }
 }
 
-export default Equipment;
+export default EquipmentType;

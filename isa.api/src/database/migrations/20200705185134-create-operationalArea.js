@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('equipments', {
+    return queryInterface.createTable('operational_areas', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -9,20 +9,6 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
-      },
-      type: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      area: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      working: {
-        type: Sequelize.BOOLEAN,
-        default: false,
         allowNull: false,
       },
       created_at: {
@@ -37,6 +23,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('equipments');
+    return queryInterface.dropTable('operational_areas');
   },
 };
