@@ -8,7 +8,9 @@ class UserController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation Fails' });
+      return res
+        .status(400)
+        .json({ error: 'Confira os dados que estão sendo cadastrados' });
     }
 
     const equipmentTypeExists = await EquipmentType.findOne({
@@ -16,7 +18,7 @@ class UserController {
     });
 
     if (equipmentTypeExists)
-      return res.status(400).json({ error: 'User already exists' });
+      return res.status(400).json({ error: 'O Tipo de Equipamento já existe' });
 
     const { id, name } = await EquipmentType.create(req.body);
 

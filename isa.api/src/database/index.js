@@ -3,10 +3,11 @@ import Sequelize from 'sequelize';
 import User from '../app/models/User';
 import EquipmentType from '../app/models/EquipmentType';
 import OperationalArea from '../app/models/OperationalArea';
+import Equipment from '../app/models/Equipment';
 
 import databaseConfig from '../configs/database';
 
-const models = [User, EquipmentType, OperationalArea];
+const models = [User, EquipmentType, OperationalArea, Equipment];
 class Database {
   constructor() {
     this.init();

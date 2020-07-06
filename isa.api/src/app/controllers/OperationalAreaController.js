@@ -8,15 +8,17 @@ class OperationalAreaController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation Fails' });
+      return res.status(400).json({ error: 'Verifique os dados informados' });
     }
 
-    const equipmentTypeExists = await OperationalArea.findOne({
+    const operationalAreaExist = await OperationalArea.findOne({
       where: { name: req.body.name },
     });
 
-    if (equipmentTypeExists)
-      return res.status(400).json({ error: 'User already exists' });
+    if (operationalAreaExist)
+      return res
+        .status(400)
+        .json({ error: 'Esta area operacional já está cadastrada' });
 
     const { id, name } = await OperationalArea.create(req.body);
 
