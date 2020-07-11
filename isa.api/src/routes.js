@@ -23,5 +23,6 @@ routes.post(
 
 routes.post('/equipment', AuthMiddleware, EquipmentController.store);
 routes.put('/equipment/:id', AuthMiddleware, EquipmentController.update);
+routes.delete('/equipment/:id', AuthMiddleware, EquipmentController.delete);
 
 export default routes;

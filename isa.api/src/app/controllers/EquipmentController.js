@@ -90,6 +90,24 @@ class EquipmentController {
       area,
     });
   }
+
+  async delete(req, res) {
+    try {
+      await Equipment.destroy({
+        where: {
+          id: req.params.id,
+        },
+      });
+
+      return res
+        .status(200)
+        .json({ message: 'Equipamento foi deletado com sucesso' });
+    } catch (error) {
+      return res
+        .status(400)
+        .json({ message: 'Não foi possivel deletar o equipamento' });
+    }
+  }
 }
 
 export default new EquipmentController();
