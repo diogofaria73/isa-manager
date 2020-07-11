@@ -1,18 +1,26 @@
 import { Router } from 'express';
 
-import User from './app/controllers/UserController';
-import EquipmentType from './app/controllers/EquipmentTypeController';
-import OperationalArea from './app/controllers/OperationalAreaController';
-import Equipment from './app/controllers/EquipmentController';
+import UserController from './app/controllers/UserController';
+import EquipmentTypeController from './app/controllers/EquipmentTypeController';
+import OperationalAreaController from './app/controllers/OperationalAreaController';
+import EquipmentController from './app/controllers/EquipmentController';
+import SessionController from './app/controllers/SessionController';
+import AuthMiddleware from './middlewares/auth';
 
 const routes = new Router();
 
-routes.post('/user', User.store);
+routes.post('/sessions', SessionController.store);
 
-routes.post('/equipmentType', EquipmentType.store);
+routes.post('/user', AuthMiddleware, UserController.store);
 
-routes.post('/operationalArea', OperationalArea.store);
+routes.post('/equipmentType', AuthMiddleware, EquipmentTypeController.store);
 
-routes.post('/equipment', Equipment.store);
+routes.post(
+  '/operationalArea',
+  AuthMiddleware,
+  OperationalAreaController.store
+);
+
+routes.post('/equipment', AuthMiddleware, EquipmentController.store);
 
 export default routes;
