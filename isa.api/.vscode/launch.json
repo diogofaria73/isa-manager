@@ -10,7 +10,8 @@
       "name": "Node",
       "restart": true,
       "protocol": "inspector",
-      "skipFiles": ["<node_internals>/**"]
+      "skipFiles": ["<node_internals>/**"],
+      "trace": true
     }
   ]
 }
