@@ -17,11 +17,11 @@ class Equipment extends Model {
   static associate(models) {
     this.belongsTo(models.OperationalArea, {
       foreignKey: 'operational_area_id',
-      as: 'area_id',
+      as: 'area',
     });
     this.belongsTo(models.EquipmentType, {
       foreignKey: 'equipment_type_id',
-      as: 'type_id',
+      as: 'type',
     });
   }
 }
