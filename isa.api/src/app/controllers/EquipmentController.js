@@ -5,14 +5,29 @@ import EquipmentType from '../models/EquipmentType';
 
 class EquipmentController {
   async index(req, res) {
-    const equipmentList = await Equipment.findAll();
+    const equipmentList = await Equipment.findAll({
+      include: [
+        {
+          model: OperationalArea,
+          as: 'area',
+          attributes: ['id', 'name'],
+        },
+        {
+          model: EquipmentType,
+          as: 'type',
+          attributes: ['id', 'name'],
+        },
+      ],
+    });
 
     if (!equipmentList)
       return res
         .status(400)
         .json({ error: 'Não foram encontrados equipamentos' });
 
-    return res.status(200).json({ equipmentList });
+    return res.status(200).json({
+      equipmentList,
+    });
   }
 
   async store(req, res) {
