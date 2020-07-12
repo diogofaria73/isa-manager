@@ -21,6 +21,7 @@ routes.post(
   OperationalAreaController.store
 );
 
+routes.get('/equipment', AuthMiddleware, EquipmentController.index);
 routes.post('/equipment', AuthMiddleware, EquipmentController.store);
 routes.put('/equipment/:id', AuthMiddleware, EquipmentController.update);
 routes.delete('/equipment/:id', AuthMiddleware, EquipmentController.delete);
