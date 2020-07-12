@@ -1,9 +1,20 @@
 import * as Yup from 'yup';
 import Equipment from '../models/Equipment';
 import OperationalArea from '../models/OperationalArea';
-// import EquipmentType from '../models/EquipmentType';
+import EquipmentType from '../models/EquipmentType';
 
 class EquipmentController {
+  async index(req, res) {
+    const equipmentList = await Equipment.findAll();
+
+    if (!equipmentList)
+      return res
+        .status(400)
+        .json({ error: 'Não foram encontrados equipamentos' });
+
+    return res.status(200).json({ equipmentList });
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string()
@@ -73,21 +84,30 @@ class EquipmentController {
 
     await equipment.update(req.body);
 
-    const { id, name, tag, area } = await Equipment.findByPk(req.params.id, {
-      include: [
-        {
-          model: OperationalArea,
-          as: 'area',
-          attributes: ['id', 'name'],
-        },
-      ],
-    });
+    const { id, name, tag, area, type } = await Equipment.findByPk(
+      req.params.id,
+      {
+        include: [
+          {
+            model: OperationalArea,
+            as: 'area',
+            attributes: ['id', 'name'],
+          },
+          {
+            model: EquipmentType,
+            as: 'type',
+            attributes: ['id', 'name'],
+          },
+        ],
+      }
+    );
 
     return res.json({
       id,
       name,
       tag,
       area,
+      type,
     });
   }
 
