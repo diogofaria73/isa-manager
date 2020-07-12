@@ -11,7 +11,7 @@ const routes = new Router();
 
 routes.post('/sessions', SessionController.store);
 
-routes.post('/user', AuthMiddleware, UserController.store);
+routes.post('/user', UserController.store);
 
 routes.post('/equipmentType', AuthMiddleware, EquipmentTypeController.store);
 

@@ -16,6 +16,10 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      is_active: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
       operational_area_id: {
         type: Sequelize.INTEGER,
         references: { model: 'operational_areas', key: 'id' },
