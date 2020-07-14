@@ -13,12 +13,34 @@ routes.post('/sessions', SessionController.store);
 
 routes.post('/user', UserController.store);
 
+routes.get('/equipmentType', AuthMiddleware, EquipmentTypeController.index);
 routes.post('/equipmentType', AuthMiddleware, EquipmentTypeController.store);
+routes.put(
+  '/equipmentType/:id',
+  AuthMiddleware,
+  EquipmentTypeController.update
+);
+routes.delete(
+  '/equipmentType/:id',
+  AuthMiddleware,
+  EquipmentTypeController.delete
+);
 
+routes.get('/operationalArea', AuthMiddleware, OperationalAreaController.index);
 routes.post(
   '/operationalArea',
   AuthMiddleware,
   OperationalAreaController.store
+);
+routes.put(
+  '/operationalArea/:id',
+  AuthMiddleware,
+  OperationalAreaController.update
+);
+routes.delete(
+  '/operationalArea/:id',
+  AuthMiddleware,
+  OperationalAreaController.delete
 );
 
 routes.get('/equipment', AuthMiddleware, EquipmentController.index);
