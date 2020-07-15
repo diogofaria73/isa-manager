@@ -1,12 +1,15 @@
 import React from 'react';
+import { Router } from 'react-router-dom';
+import Routes from './routes';
+import GlobalStyle from './styles/global.js';
+import history from './services/history';
 
 function App() {
   return (
-    <div>
-      <header>
-        <p>ISA Manager Web</p>
-      </header>
-    </div>
+    <Router history={history}>
+      <Routes />
+      <GlobalStyle />
+    </Router>
   );
 }
 
