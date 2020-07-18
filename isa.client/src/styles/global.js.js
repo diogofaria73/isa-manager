@@ -9,6 +9,7 @@ export default createGlobalStyle`
     padding: 0;
     outline: 0;
     box-sizing: border-box;
+
   }
 
   *:focus{
@@ -24,14 +25,14 @@ export default createGlobalStyle`
   }
 
   body, input, button {
-    font: 14px 'Roboto', sans-serif;
+    font: 15px 'Roboto', sans-serif;
   }
 
   a{
     text-decoration: none;
   }
 
-  ul{
+  ul, li{
     list-style: none;
   }
 

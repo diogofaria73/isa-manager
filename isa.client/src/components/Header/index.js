@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Navbar, NavDropdown, Nav } from 'react-bootstrap';
 
 export default function Header() {
-  // const deafultAvatar = 'https://api.adorable.io/avatars/60/abott@adorable.png';
   return (
     <Navbar collapseOnSelect expand="xl" bg="dark" variant="dark">
       <Navbar.Brand>
@@ -31,7 +30,7 @@ export default function Header() {
         </Nav>
         <Nav>
           <Nav.Link>
-            <Link to="/perfil">Perfil</Link>
+            <Link to="/profile">Perfil</Link>
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>

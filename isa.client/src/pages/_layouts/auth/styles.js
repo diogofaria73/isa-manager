@@ -10,25 +10,33 @@ export const Wrapper = styled.div`
 
 export const Content = styled.div`
   width: 100%;
-  max-width: 315px;
+  max-width: 500px;
   text-align: center;
+
+  img {
+    display: center;
+    flex-direction: column;
+    height: 80px;
+  }
 
   form {
     display: flex;
     flex-direction: column;
     margin-top: 30px;
+    padding: 60px 68px 40px;
+    margin-bottom: 90px;
 
     input {
-      background: rgba(0, 0, 0, 0.1);
+      background: #e8f0fe;
       border: 0;
       border-radius: 4px;
       height: 44px;
-      padding: 0 15px;
-      color: #fff;
+      color: black;
       margin: 0 0 10px;
 
       &::placeholder {
-        color: rgba(255, 255, 255, 0.5);
+        color: black;
+        opacity: 1;
       }
     }
 
@@ -42,16 +50,16 @@ export const Content = styled.div`
     button {
       margin: 5px 0 0;
       height: 44px;
-      background: #3b9eff;
+      background: #343a40;
       font-weight: bold;
       color: #fff;
       border: 0;
       border-radius: 4px;
       font-size: 16px;
-      transition: background 0.2s;
+      transition: background 0.3s;
 
       &:hover {
-        background: ${darken(0.04, '#3b9eff')};
+        background: ${darken(0.08, '#343A40')};
       }
     }
 

@@ -9,9 +9,6 @@ export default function RouteWrapper({
   isPrivate,
   ...rest
 }) {
-  // pensei em tentar receber o token se for valido coloco aqui como true e
-  // o usuário é redirecionado para a página de default
-  // se for false será apresentada a tela de Login... Ta funcioinando direito nao, tenho que resolver
   const signed = false;
 
   if (!signed && isPrivate) {
