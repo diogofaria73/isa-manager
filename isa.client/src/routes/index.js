@@ -13,13 +13,8 @@ export default function Routes() {
       <Route path="/" exact component={SignIn} />
       <Route path="/dashboard" exact component={Dashboard} isPrivate />
       <Route path="/equipment" exact component={Equipment} isPrivate />
-      <Route path="/equipmentType" exact component={EquipmentType} isPrivate />
-      <Route
-        path="/operationalArea"
-        exact
-        component={OperationalArea}
-        isPrivate
-      />
+      <Route path="/type" exact component={EquipmentType} isPrivate />
+      <Route path="/area" exact component={OperationalArea} isPrivate />
     </Switch>
   );
 }
