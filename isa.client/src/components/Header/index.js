@@ -11,20 +11,20 @@ export default function Header() {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <NavDropdown title="Dashboards" id="collasible-nav-dropdown">
+          <NavDropdown title="Relatórios" id="collasible-nav-dropdown">
             <NavDropdown.Item>
-              <Link to="/operationalArea">Análise de Equipamentos</Link>
+              <Link to="/dashboard">Análise de Equipamentos</Link>
             </NavDropdown.Item>
           </NavDropdown>
           <NavDropdown title="Cadastros" id="collasible-nav-dropdown">
             <NavDropdown.Item>
-              <Link to="/operationalArea">Áreas Operacionais</Link>
+              <Link to="/area">Áreas Operacionais</Link>
             </NavDropdown.Item>
             <NavDropdown.Item>
               <Link to="/equipment">Equipamentos</Link>
             </NavDropdown.Item>
             <NavDropdown.Item>
-              <Link to="/equipmentType">Tipos</Link>
+              <Link to="/type">Tipos</Link>
             </NavDropdown.Item>
           </NavDropdown>
         </Nav>

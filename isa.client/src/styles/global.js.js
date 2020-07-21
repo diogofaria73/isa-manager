@@ -39,4 +39,12 @@ export default createGlobalStyle`
   button{
     cursor:pointer
   }
+
+  table{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
 `;
