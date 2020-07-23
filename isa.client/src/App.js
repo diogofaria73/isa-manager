@@ -7,7 +7,7 @@ import { Router } from 'react-router-dom';
 import Routes from './routes';
 import history from './services/history';
 import { store, persistor } from './store';
-import GlobalStyle from './styles/global.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
@@ -15,7 +15,6 @@ function App() {
       <PersistGate persistor={persistor}>
         <Router history={history}>
           <Routes />
-          <GlobalStyle />
           <ToastContainer autoClose={3000} />
         </Router>
       </PersistGate>
