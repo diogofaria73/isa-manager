@@ -7,7 +7,7 @@ import { Router } from 'react-router-dom';
 import Routes from './routes';
 import history from './services/history';
 import { store, persistor } from './store';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import 'font-awesome/css/font-awesome.min.css';
 
 function App() {
   return (
