@@ -1,117 +1,86 @@
-import React from 'react';
+import React, { Component } from 'react';
+import api from '../../services/api';
 
-function Equipment() {
-  return (
-    <div className="container">
-      <div className="row">
-        <div id="accordion">
-          <div className="card">
-            <div className="card-header" id="headingOne">
-              <h5 className="mb-0">
-                <button
-                  class="btn btn-link"
-                  data-toggle="collapse"
-                  data-target="#collapseOne"
-                  aria-expanded="true"
-                  aria-controls="collapseOne"
-                >
-                  Collapsible Group Item #1
-                </button>
-              </h5>
-            </div>
+class Equipment extends Component {
+  state = {
+    equipments: [],
+  };
 
-            <div
-              id="collapseOne"
-              className="collapse show"
-              aria-labelledby="headingOne"
-              data-parent="#accordion"
-            >
-              <div className="card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life
-                accusamus terry richardson ad squid. 3 wolf moon officia aute,
-                non cupidatat skateboard dolor brunch. Food truck quinoa
-                nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua
-                put a bird on it squid single-origin coffee nulla assumenda
-                shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
-                wes anderson cred nesciunt sapiente ea proident. Ad vegan
-                excepteur butcher vice lomo. Leggings occaecat craft beer
-                farm-to-table, raw denim aesthetic synth nesciunt you probably
-                haven't heard of them accusamus labore sustainable VHS.
+  async componentDidMount() {
+    const response = await api.get('equipment');
+    this.setState({ equipments: response.data.equipmentList });
+  }
+
+  render() {
+    const { equipments } = this.state;
+    return (
+      <div>
+        <section className=" form-group mt-5 d-flex justify-content-between">
+          <div className="row align-content-between">
+            <div className="col-md-4">
+              <div className="input-group-sm mb-auto">
+                <input
+                  className="form-control"
+                  placeholder="Tag do Equipamento"
+                />
               </div>
             </div>
-          </div>
-          <div className="card">
-            <div className="card-header" id="headingTwo">
-              <h5 className="mb-0">
-                <button
-                  className="btn btn-link collapsed"
-                  data-toggle="collapse"
-                  data-target="#collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="collapseTwo"
-                >
-                  Collapsible Group Item #2
+            <div className="col-md-4">
+              <div className="input-group-sm mb-3">
+                <input
+                  className="form-control"
+                  placeholder="Tipo do Equipamento"
+                />
+              </div>
+            </div>
+            <div className="col-md-3">
+              <div className="input-group-sm mb-3">
+                <input className="form-control" placeholder="Status" />
+              </div>
+            </div>
+            <div className="col-md-1">
+              <div className="btn-group">
+                <button type="button" className="btn btn-primary btn-sm">
+                  Pesquisar
                 </button>
-              </h5>
-            </div>
-            <div
-              id="collapseTwo"
-              className="collapse"
-              aria-labelledby="headingTwo"
-              data-parent="#accordion"
-            >
-              <div className="card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life
-                accusamus terry richardson ad squid. 3 wolf moon officia aute,
-                non cupidatat skateboard dolor brunch. Food truck quinoa
-                nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua
-                put a bird on it squid single-origin coffee nulla assumenda
-                shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
-                wes anderson cred nesciunt sapiente ea proident. Ad vegan
-                excepteur butcher vice lomo. Leggings occaecat craft beer
-                farm-to-table, raw denim aesthetic synth nesciunt you probably
-                haven't heard of them accusamus labore sustainable VHS.
               </div>
             </div>
           </div>
-          <div className="card">
-            <div className="card-header" id="headingThree">
-              <h5 className="mb-0">
-                <button
-                  className="btn btn-link collapsed"
-                  data-toggle="collapse"
-                  data-target="#collapseThree"
-                  aria-expanded="false"
-                  aria-controls="collapseThree"
-                >
-                  Collapsible Group Item #3
-                </button>
-              </h5>
-            </div>
-            <div
-              id="collapseThree"
-              className="collapse"
-              aria-labelledby="headingThree"
-              data-parent="#accordion"
-            >
-              <div className="card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life
-                accusamus terry richardson ad squid. 3 wolf moon officia aute,
-                non cupidatat skateboard dolor brunch. Food truck quinoa
-                nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua
-                put a bird on it squid single-origin coffee nulla assumenda
-                shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
-                wes anderson cred nesciunt sapiente ea proident. Ad vegan
-                excepteur butcher vice lomo. Leggings occaecat craft beer
-                farm-to-table, raw denim aesthetic synth nesciunt you probably
-                haven't heard of them accusamus labore sustainable VHS.
-              </div>
-            </div>
-          </div>
-        </div>
+        </section>
+        <section className="align-baseline">
+          <table className="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Tag</th>
+                <th>Tipo</th>
+                <th>Localidade</th>
+                <th>Ativo</th>
+                <th>Data Cadastro</th>
+                <th>Editar</th>
+                <th>Apagar</th>
+              </tr>
+            </thead>
+            <tbody>
+              {equipments.map((equipment) => (
+                <tr key={equipment.id}>
+                  <td>{equipment.tag}</td>
+                  <td>{equipment.type.name}</td>
+                  <td>{equipment.area.name}</td>
+                  <td>{equipment.is_active}</td>
+                  <td>{equipment.createdAt}</td>
+                  <td>
+                    <span className="fa fa-edit" />
+                  </td>
+                  <td>
+                    <span className="fa fa-trash" />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
       </div>
-    </div>
-  );
+    );
+  }
 }
-
 export default Equipment;
