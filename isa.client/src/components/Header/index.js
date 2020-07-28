@@ -14,7 +14,7 @@ export default function Header() {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand">
-          ISA
+          Garoto
         </Link>
 
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
