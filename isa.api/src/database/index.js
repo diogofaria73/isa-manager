@@ -4,10 +4,10 @@ import User from '../app/models/User';
 import EquipmentType from '../app/models/EquipmentType';
 import OperationalArea from '../app/models/OperationalArea';
 import Equipment from '../app/models/Equipment';
-
+import Parameter from '../app/models/Parameter';
 import databaseConfig from '../configs/database';
 
-const models = [User, EquipmentType, OperationalArea, Equipment];
+const models = [User, EquipmentType, OperationalArea, Equipment, Parameter];
 class Database {
   constructor() {
     this.init();

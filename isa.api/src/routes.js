@@ -4,6 +4,7 @@ import UserController from './app/controllers/UserController';
 import EquipmentTypeController from './app/controllers/EquipmentTypeController';
 import OperationalAreaController from './app/controllers/OperationalAreaController';
 import EquipmentController from './app/controllers/EquipmentController';
+import ParameterController from './app/controllers/ParameterController';
 import SessionController from './app/controllers/SessionController';
 import AuthMiddleware from './middlewares/auth';
 
@@ -47,5 +48,10 @@ routes.get('/equipment', AuthMiddleware, EquipmentController.index);
 routes.post('/equipment', AuthMiddleware, EquipmentController.store);
 routes.put('/equipment/:id', AuthMiddleware, EquipmentController.update);
 routes.delete('/equipment/:id', AuthMiddleware, EquipmentController.delete);
+
+routes.get('/parameter', AuthMiddleware, ParameterController.index);
+routes.post('/parameter', AuthMiddleware, ParameterController.store);
+routes.put('/parameter/:id', AuthMiddleware, ParameterController.update);
+routes.delete('/parameter/:id', AuthMiddleware, ParameterController.delete);
 
 export default routes;
