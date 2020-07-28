@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { BsFillPlusCircleFill, BsSearch } from 'react-icons/bs';
+import EquipmentFilter from '../../components/Filters/Equipment/EquipmentFilter';
+import { BsFillPlusCircleFill } from 'react-icons/bs';
 import api from '../../services/api';
 
 class Equipment extends Component {
@@ -33,38 +34,7 @@ class Equipment extends Component {
     const { equipments } = this.state;
     return (
       <div>
-        <section className=" form-group mt-5 d-flex justify-content-between">
-          <div className="row align-content-between">
-            <div className="col-md-4">
-              <div className="input-group-sm mb-auto">
-                <input
-                  className="form-control"
-                  placeholder="Tag do Equipamento"
-                />
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="input-group-sm mb-3">
-                <input
-                  className="form-control"
-                  placeholder="Tipo do Equipamento"
-                />
-              </div>
-            </div>
-            <div className="col-md-2">
-              <div className="input-group-sm mb-3">
-                <input className="form-control" placeholder="Status" />
-              </div>
-            </div>
-            <div className="col-md-2">
-              <div className="btn-group">
-                <button type="button" className="btn btn-secondary btn-sm">
-                  <BsSearch size={16} color="#FFF" /> Pesquisar
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
+        <EquipmentFilter />
         <section className="align-baseline">
           <table className="table table-sm table-striped table-hover">
             <thead>
