@@ -5,11 +5,11 @@ import { BsArrowBarRight } from 'react-icons/bs';
 import { signOut } from '../../store/modules/auth/actions';
 
 export default function Header() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // function handleLogout() {
-  //   dispatch(signOut());
-  // }
+  function handleLogout() {
+    dispatch(signOut());
+  }
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
@@ -18,32 +18,45 @@ export default function Header() {
         </Link>
 
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul className="navbar-nav ml-auto">
+          <ul className="navbar-nav ml-auto align-content-between">
             <li className="nav-item">
-              <Link to="/equipment" className="nav-link">
-                Equipamentos
-              </Link>
+              <a className="nav-link">KPIs</a>
             </li>
-            <li className="nav-item">
-              <Link to="/type" className="nav-link">
-                Tipos
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/area" className="nav-link">
-                Área Operacional
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/user" className="nav-link">
-                Usuários
-              </Link>
-            </li>
-            {/* <li className="nav-item">
-              <a onClick={handleLogout()}>
-                <BsArrowBarRight size={16} color="#FFF" />
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                href="/"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Cadastros
               </a>
-            </li> */}
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a className="dropdown-item" href="/area">
+                  Áreas
+                </a>
+                <a className="dropdown-item" href="/equipment">
+                  Equipamentos
+                </a>
+                <a className="dropdown-item" href="/parameter">
+                  Parâmetros
+                </a>
+                <a className="dropdown-item" href="/type">
+                  Tipo de Equipamentos
+                </a>
+                <a className="dropdown-item" href="/user">
+                  Usuários
+                </a>
+              </div>
+            </li>
+            <li className="nav-item">
+              <a onClick={handleLogout} className="nav-link">
+                <BsArrowBarRight />
+              </a>
+            </li>
           </ul>
         </div>
       </div>
