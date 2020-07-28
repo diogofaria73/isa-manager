@@ -26,6 +26,10 @@ class Equipment extends Component {
     this.setState({ equipments: data });
   }
 
+  async handleDelete(equipment) {
+    const response = await api.delete(`equipment/${equipment.id}`);
+  }
+
   handleModal = (equipment) => {
     alert(`Abrindo o modal para editar o equipamento ${equipment.id}`);
   };

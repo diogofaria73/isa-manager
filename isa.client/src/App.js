@@ -1,6 +1,7 @@
 import React from 'react';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './config/ReactotronConfig';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
