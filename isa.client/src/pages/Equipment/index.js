@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BsFillPlusCircleFill, BsSearch } from 'react-icons/bs';
 import api from '../../services/api';
 
 class Equipment extends Component {
@@ -8,8 +9,25 @@ class Equipment extends Component {
 
   async componentDidMount() {
     const response = await api.get('equipment');
-    this.setState({ equipments: response.data.equipmentList });
+
+    const data = response.data.equipmentList.map((equipment) => ({
+      ...equipment,
+      // createdAt: format(equipment.createdAt, 'dd/MM/YYYY HH:mm', {
+      //   locale: pt,
+      //   timeZone: 'America/Sao_Paulo',
+      // }),
+    }));
+
+    // format(addedDate, 'dd/MM/YYYY HH:mm', {
+    //   timeZone: 'America/Sao_Paulo',
+    // });
+
+    this.setState({ equipments: data });
   }
+
+  handleModal = (equipment) => {
+    alert(`Abrindo o modal para editar o equipamento ${equipment.id}`);
+  };
 
   render() {
     const { equipments } = this.state;
@@ -33,22 +51,22 @@ class Equipment extends Component {
                 />
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-2">
               <div className="input-group-sm mb-3">
                 <input className="form-control" placeholder="Status" />
               </div>
             </div>
-            <div className="col-md-1">
+            <div className="col-md-2">
               <div className="btn-group">
-                <button type="button" className="btn btn-primary btn-sm">
-                  Pesquisar
+                <button type="button" className="btn btn-secondary btn-sm">
+                  <BsSearch size={16} color="#FFF" /> Pesquisar
                 </button>
               </div>
             </div>
           </div>
         </section>
         <section className="align-baseline">
-          <table className="table table-striped table-hover">
+          <table className="table table-sm table-striped table-hover">
             <thead>
               <tr>
                 <th>Tag</th>
@@ -66,10 +84,13 @@ class Equipment extends Component {
                   <td>{equipment.tag}</td>
                   <td>{equipment.type.name}</td>
                   <td>{equipment.area.name}</td>
-                  <td>{equipment.is_active}</td>
+                  <td>{equipment.active}</td>
                   <td>{equipment.createdAt}</td>
                   <td>
-                    <span className="fa fa-edit" />
+                    <span
+                      className="fa fa-edit"
+                      onClick={() => this.handleModal(equipment)}
+                    />
                   </td>
                   <td>
                     <span className="fa fa-trash" />
@@ -78,6 +99,13 @@ class Equipment extends Component {
               ))}
             </tbody>
           </table>
+          <div className="align-baseline d-flex justify-content-end">
+            <div className="btn-group">
+              <button type="button" className="btn btn-secondary btn-sm">
+                <BsFillPlusCircleFill size={16} color="#FFF" /> Adicionar
+              </button>
+            </div>
+          </div>
         </section>
       </div>
     );
