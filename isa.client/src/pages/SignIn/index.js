@@ -24,14 +24,26 @@ export default function SingIn() {
   }
 
   return (
-    <>
-      <img src={logo} alt="ISA Engenharia" />
-      <Form schema={schema} onSubmit={handleSubmit}>
-        <Input name="email" type="email" placeholder="Digite seu e-mail" />
-        <Input name="password" type="password" placeholder="Digite sua senha" />
+    <div className="align-content-center container-sm align-items-center mt-5">
+      <img src={logo} alt="ISA Engenharia" className="offset-auto" />
+      <Form schema={schema} onSubmit={handleSubmit} className="mt-5">
+        <Input
+          className="form-control"
+          name="email"
+          type="email"
+          placeholder="Digite seu e-mail"
+        />
+        <Input
+          className="form-control mt-2"
+          name="password"
+          type="password"
+          placeholder="Digite sua senha"
+        />
 
-        <button type="submit">{loading ? 'Carregando...' : 'Acessar'}</button>
+        <button className="btn btn-secondary mt-2" type="submit">
+          {loading ? 'Carregando...' : 'Acessar'}
+        </button>
       </Form>
-    </>
+    </div>
   );
 }
