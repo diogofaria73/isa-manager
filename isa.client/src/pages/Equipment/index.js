@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import EquipmentFilter from '../../components/Filters/Equipment/EquipmentFilter';
+import EquipmentFilter from '../../components/Equipment/Filter/EquipmentFilter';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import api from '../../services/api';
 
