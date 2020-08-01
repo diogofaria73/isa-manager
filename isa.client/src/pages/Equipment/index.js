@@ -48,6 +48,7 @@ class Equipment extends Component {
                 <th>Tipo</th>
                 <th>Localidade</th>
                 <th>Ativo</th>
+                <th>Tag CLP</th>
                 <th>Data Cadastro</th>
                 <th>Editar</th>
                 <th>Apagar</th>
@@ -60,6 +61,7 @@ class Equipment extends Component {
                   <td>{equipment.type.name}</td>
                   <td>{equipment.area.name}</td>
                   <td>{equipment.active}</td>
+                  <td>{equipment.plcTag}</td>
                   <td>{equipment.createdAt}</td>
                   <td>
                     <span
