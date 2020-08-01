@@ -3,9 +3,7 @@ import EquipmentType from '../models/EquipmentType';
 
 class EquipmentTypeController {
   async index(req, res) {
-    const equipmentTypesList = await EquipmentType.findAll({
-      attributes: ['id', 'name'],
-    });
+    const equipmentTypesList = await EquipmentType.findAll();
 
     if (!equipmentTypesList)
       return res

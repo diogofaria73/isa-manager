@@ -2,6 +2,19 @@ import * as Yup from 'yup';
 import User from '../models/User';
 
 class UserController {
+  async index(req, res) {
+    const usersList = await User.findAll();
+
+    if (!usersList)
+      return res
+        .status(200)
+        .json({ error: 'Não existe nenhum equipamento cadastrado' });
+
+    return res.json({
+      usersList,
+    });
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),

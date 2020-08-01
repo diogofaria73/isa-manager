@@ -3,9 +3,7 @@ import OperationalArea from '../models/OperationalArea';
 
 class OperationalAreaController {
   async index(req, res) {
-    const operationalAreaList = await OperationalArea.findAll({
-      attributes: ['id', 'name'],
-    });
+    const operationalAreaList = await OperationalArea.findAll();
 
     if (!operationalAreaList)
       return res

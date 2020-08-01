@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 import Parameter from '../models/Parameter';
 
 class ParameterController {
+  // Listagem de todos os parâmetros na tela inicial.
   async index(req, res) {
     const parameterList = await Parameter.findAll();
 
@@ -50,6 +51,7 @@ class ParameterController {
   async update(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
+      price: Yup.number().required(),
     });
 
     if (!(await schema.isValid(req.body)))
@@ -61,14 +63,14 @@ class ParameterController {
       return res.status(400).json({ error: 'Parâmetro não encontrado.' });
     }
 
-    await Parameter.update(req.body);
+    await parameter.update(req.body);
 
-    const { id, name, value } = await Parameter.findByPk(req.params.id);
+    const { id, name, price } = await Parameter.findByPk(req.params.id);
 
     return res.json({
       id,
       name,
-      value,
+      price,
     });
   }
 
