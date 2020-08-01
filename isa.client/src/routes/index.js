@@ -8,6 +8,7 @@ import OperationalArea from '../pages/OperationalArea';
 import SignIn from '../pages/SignIn';
 import Parameter from '../pages/Parameter';
 import User from '../pages/User';
+import Consumption from '../pages/Consumption';
 
 export default function Routes() {
   return (
@@ -19,6 +20,7 @@ export default function Routes() {
       <Route path="/area" exact component={OperationalArea} isPrivate />
       <Route path="/parameter" exact component={Parameter} isPrivate />
       <Route path="/user" exact component={User} isPrivate />
+      <Route path="/consumption" exact component={Consumption} isPrivate />
     </Switch>
   );
 }

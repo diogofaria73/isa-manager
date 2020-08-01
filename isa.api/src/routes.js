@@ -5,6 +5,7 @@ import EquipmentTypeController from './app/controllers/EquipmentTypeController';
 import OperationalAreaController from './app/controllers/OperationalAreaController';
 import EquipmentController from './app/controllers/EquipmentController';
 import ParameterController from './app/controllers/ParameterController';
+import ConsumptionController from './app/controllers/ConsumptionController';
 import SessionController from './app/controllers/SessionController';
 import AuthMiddleware from './middlewares/auth';
 
@@ -54,5 +55,7 @@ routes.get('/parameter', AuthMiddleware, ParameterController.index);
 routes.post('/parameter', AuthMiddleware, ParameterController.store);
 routes.put('/parameter/:id', AuthMiddleware, ParameterController.update);
 routes.delete('/parameter/:id', AuthMiddleware, ParameterController.delete);
+
+routes.get('/consumption', AuthMiddleware, ConsumptionController.index);
 
 export default routes;

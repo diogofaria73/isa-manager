@@ -22,6 +22,9 @@ export default function Header() {
             <li className="nav-item">
               <a className="nav-link">KPIs</a>
             </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/consumption">Consumo</a>
+            </li>
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
