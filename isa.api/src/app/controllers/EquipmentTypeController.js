@@ -64,7 +64,7 @@ class EquipmentTypeController {
       }
     }
 
-    await EquipmentType.update(req.body);
+    await equipmentType.update(req.body);
 
     const { id, name } = await EquipmentType.findByPk(req.params.id);
 

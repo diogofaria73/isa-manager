@@ -38,6 +38,7 @@ class Equipment extends Component {
     const { equipments } = this.state;
     return (
       <div>
+        <div className="mt-4"><h3>Equipamentos:</h3></div>
         <EquipmentFilter />
         <section className="align-baseline">
           <table className="table table-sm table-striped table-hover">
