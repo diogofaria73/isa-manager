@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import api from '../../services/api';
+import Title from '../../components/Title';
 
 class EquipmentType extends Component {
   state = {
@@ -36,7 +37,7 @@ class EquipmentType extends Component {
     const { equipmentTypes } = this.state;
     return (
       <div className="mt-4">
-        <h3>Tipo de Equipamento:</h3>
+        <Title titulo="Tipo de Equipamento:" />
         <section className="align-baseline mt-4">
           <table className="table table-sm table-striped table-hover">
             <thead>

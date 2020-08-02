@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import EquipmentFilter from '../../components/Equipment/Filter/EquipmentFilter';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import api from '../../services/api';
+import Title from '../../components/Title';
 
 class Equipment extends Component {
   state = {
@@ -37,8 +38,8 @@ class Equipment extends Component {
   render() {
     const { equipments } = this.state;
     return (
-      <div>
-        <div className="mt-4"><h3>Equipamentos:</h3></div>
+      <div className="mt-4">
+        <Title titulo="Equipamentos:" />
         <EquipmentFilter />
         <section className="align-baseline">
           <table className="table table-sm table-striped table-hover">

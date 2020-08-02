@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import api from '../../services/api';
+import Title from '../../components/Title';
 
 class Parameter extends Component {
   state = {
@@ -36,7 +37,7 @@ class Parameter extends Component {
     const { parameters } = this.state;
     return (
       <div className="mt-4">
-        <h3>Parâmetros:</h3>
+        <Title titulo="Parâmetros:" />
         <section className="align-baseline mt-4">
           <table className="table table-sm table-striped table-hover">
             <thead>
