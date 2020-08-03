@@ -15,7 +15,7 @@ class DashboardFilter extends React.Component {
   };
 
   async componentDidMount() {
-    var response = await api.get('operationalArea');
+    var response = await api.get('dashboard');
 
     var data = response.data.operationalAreaList.map((operationalArea) => ({
       ...operationalArea,
@@ -23,15 +23,11 @@ class DashboardFilter extends React.Component {
 
     this.setState({ operationalAreas: data });
 
-    response = await api.get('equipmentType');
-
-    data = response.data.equipmentTypesList.map((equipmentType) => ({
+    data = response.data.equipmentTypeList.map((equipmentType) => ({
       ...equipmentType,
     }));
 
     this.setState({ equipmentTypes: data });
-
-    response = await api.get('equipment');
 
     data = response.data.equipmentList.map((equipmentType) => ({
       ...equipmentType,
@@ -77,7 +73,7 @@ class DashboardFilter extends React.Component {
             <select value={this.state.value} onChange={this.handleChange} class="form-control">
               <option value="0">Todos</option>
               { this.state.equipments.map((equipment) => (
-                <option value={equipment.id}>{equipment.name}</option>
+                <option value={equipment.id}>{equipment.tag}</option>
               ))}
             </select>
           </div>

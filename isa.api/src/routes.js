@@ -6,6 +6,7 @@ import OperationalAreaController from './app/controllers/OperationalAreaControll
 import EquipmentController from './app/controllers/EquipmentController';
 import ParameterController from './app/controllers/ParameterController';
 import ConsumptionController from './app/controllers/ConsumptionController';
+import DashboardController from './app/controllers/DashboardController';
 import SessionController from './app/controllers/SessionController';
 import AuthMiddleware from './middlewares/auth';
 
@@ -57,5 +58,6 @@ routes.put('/parameter/:id', AuthMiddleware, ParameterController.update);
 routes.delete('/parameter/:id', AuthMiddleware, ParameterController.delete);
 
 routes.get('/consumption', AuthMiddleware, ConsumptionController.index);
+routes.get('/dashboard', AuthMiddleware, DashboardController.index);
 
 export default routes;
