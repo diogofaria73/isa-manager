@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import DashboardFilter from './dashboardfilter';
+import DashboardFilter from './filter';
 import Title from '../../components/Title';
 
 class Dashboard extends Component {
