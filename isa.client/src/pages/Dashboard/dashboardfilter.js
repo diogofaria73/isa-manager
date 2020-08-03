@@ -53,26 +53,38 @@ class DashboardFilter extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit} className=".form-control">
-        <label>Áreas Operacionais: </label>
-        <select value={this.state.value} onChange={this.handleChange} class="form-control">
-          { this.state.operationalAreas.map((operationalArea) => (
-            <option value={operationalArea.id}>{operationalArea.name}</option>
-          ))}
-        </select>
-        <label>Tipos de Equipamentos: </label>
-        <select value={this.state.value} onChange={this.handleChange} class="form-control">
-          { this.state.equipmentTypes.map((equipmentType) => (
-            <option value={equipmentType.id}>{equipmentType.name}</option>
-          ))}
-        </select>
-        <label>Equipamentos: </label>
-        <select value={this.state.value} onChange={this.handleChange} class="form-control">
-          { this.state.equipments.map((equipment) => (
-            <option value={equipment.id}>{equipment.name}</option>
-          ))}
-        </select>
-        <br></br>
-        <input type="submit" value="Filtrar" />
+        <div className="row">
+          <div className="col">
+            <label>Áreas Operacionais: </label>
+            <select value={this.state.value} onChange={this.handleChange} class="form-control">
+              <option value="0">Todos</option>
+              { this.state.operationalAreas.map((operationalArea) => (
+                <option value={operationalArea.id}>{operationalArea.name}</option>
+              ))}
+            </select>
+          </div>
+          <div className="col">
+            <label>Tipos de Equipamentos: </label>
+            <select value={this.state.value} onChange={this.handleChange} class="form-control">
+              <option value="0">Todos</option>
+              { this.state.equipmentTypes.map((equipmentType) => (
+                <option value={equipmentType.id}>{equipmentType.name}</option>
+              ))}
+            </select>
+          </div>
+          <div className="col">
+            <label>Equipamentos: </label>
+            <select value={this.state.value} onChange={this.handleChange} class="form-control">
+              <option value="0">Todos</option>
+              { this.state.equipments.map((equipment) => (
+                <option value={equipment.id}>{equipment.name}</option>
+              ))}
+            </select>
+          </div>
+          <div className="col">
+            <input type="submit" value="Filtrar" />
+          </div>
+        </div>
       </form>
     );
   }
