@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import EquipmentFilter from '../../components/Equipment/Filter/EquipmentFilter';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import api from '../../services/api';
-import Title from '../../components/Title';
 
 class Equipment extends Component {
   state = {
@@ -39,7 +39,7 @@ class Equipment extends Component {
     const { equipments } = this.state;
     return (
       <div className="mt-4">
-        <Title titulo="Equipamentos:" />
+        <h3>Lista de Equipamentos</h3>
         <EquipmentFilter />
         <section className="align-baseline">
           <table className="table table-sm table-striped table-hover">
@@ -79,9 +79,13 @@ class Equipment extends Component {
           </table>
           <div className="align-baseline d-flex justify-content-end">
             <div className="btn-group">
-              <button type="button" className="btn btn-secondary btn-sm">
+              <Link
+                to="/equipment/register"
+                type="button"
+                className="btn btn-secondary btn-sm"
+              >
                 <BsFillPlusCircleFill size={16} color="#FFF" /> Adicionar
-              </button>
+              </Link>
             </div>
           </div>
         </section>
