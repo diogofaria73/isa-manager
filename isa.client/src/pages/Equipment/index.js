@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import EquipmentFilter from '../../components/Equipment/Filter/EquipmentFilter';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import api from '../../services/api';
+import Title from '../../components/Title';
 
 class Equipment extends Component {
   state = {
@@ -37,7 +38,8 @@ class Equipment extends Component {
   render() {
     const { equipments } = this.state;
     return (
-      <div>
+      <div className="mt-4">
+        <Title titulo="Equipamentos:" />
         <EquipmentFilter />
         <section className="align-baseline">
           <table className="table table-sm table-striped table-hover">
@@ -47,6 +49,7 @@ class Equipment extends Component {
                 <th>Tipo</th>
                 <th>Localidade</th>
                 <th>Ativo</th>
+                <th>Tag CLP</th>
                 <th>Data Cadastro</th>
                 <th>Editar</th>
                 <th>Apagar</th>
@@ -59,6 +62,7 @@ class Equipment extends Component {
                   <td>{equipment.type.name}</td>
                   <td>{equipment.area.name}</td>
                   <td>{equipment.active}</td>
+                  <td>{equipment.plcTag}</td>
                   <td>{equipment.createdAt}</td>
                   <td>
                     <span

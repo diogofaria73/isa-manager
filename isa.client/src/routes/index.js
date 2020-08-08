@@ -6,6 +6,9 @@ import Equipment from '../pages/Equipment';
 import EquipmentType from '../pages/EquipmentType';
 import OperationalArea from '../pages/OperationalArea';
 import SignIn from '../pages/SignIn';
+import Parameter from '../pages/Parameter';
+import User from '../pages/User';
+import Consumption from '../pages/Consumption';
 
 export default function Routes() {
   return (
@@ -15,6 +18,9 @@ export default function Routes() {
       <Route path="/equipment" exact component={Equipment} isPrivate />
       <Route path="/type" exact component={EquipmentType} isPrivate />
       <Route path="/area" exact component={OperationalArea} isPrivate />
+      <Route path="/parameter" exact component={Parameter} isPrivate />
+      <Route path="/user" exact component={User} isPrivate />
+      <Route path="/consumption" exact component={Consumption} isPrivate />
     </Switch>
   );
 }

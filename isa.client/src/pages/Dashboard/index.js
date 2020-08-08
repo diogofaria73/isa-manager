@@ -1,7 +1,16 @@
-import React from 'react';
+import React, {Component} from 'react';
+import DashboardFilter from './filter';
+import Title from '../../components/Title';
 
-function Dashboard() {
-  return <h1>Dashboard de Status dos Equipamentos</h1>;
+class Dashboard extends Component {
+  render() {
+  return (
+      <div className="mt-4">
+        <Title titulo="Dashboard de Status dos Equipamentos:" />
+        <DashboardFilter />
+      </div>
+    );
+  }
 }
 
 export default Dashboard;

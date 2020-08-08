@@ -38,6 +38,9 @@ class EquipmentController {
       tag: Yup.string()
         .required()
         .min(5),
+      plcTag: Yup.string()
+        .required()
+        .min(3),
       operational_area_id: Yup.number().required(),
       equipment_type_id: Yup.number().required(),
     });
@@ -75,6 +78,9 @@ class EquipmentController {
       tag: Yup.string()
         .min(5)
         .required(),
+      plcTag: Yup.string()
+        .min(3)
+        .required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -99,7 +105,7 @@ class EquipmentController {
 
     await equipment.update(req.body);
 
-    const { id, name, tag, area, type } = await Equipment.findByPk(
+    const { id, name, tag, plcTag, area, type } = await Equipment.findByPk(
       req.params.id,
       {
         include: [
@@ -121,6 +127,7 @@ class EquipmentController {
       id,
       name,
       tag,
+      plcTag,
       area,
       type,
     });

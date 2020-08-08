@@ -5,6 +5,8 @@ import EquipmentTypeController from './app/controllers/EquipmentTypeController';
 import OperationalAreaController from './app/controllers/OperationalAreaController';
 import EquipmentController from './app/controllers/EquipmentController';
 import ParameterController from './app/controllers/ParameterController';
+import ConsumptionController from './app/controllers/ConsumptionController';
+import DashboardController from './app/controllers/DashboardController';
 import SessionController from './app/controllers/SessionController';
 import AuthMiddleware from './middlewares/auth';
 
@@ -12,6 +14,7 @@ const routes = new Router();
 
 routes.post('/sessions', SessionController.store);
 
+routes.get('/user', AuthMiddleware, UserController.index);
 routes.post('/user', UserController.store);
 
 routes.get('/equipmentType', AuthMiddleware, EquipmentTypeController.index);
@@ -53,5 +56,8 @@ routes.get('/parameter', AuthMiddleware, ParameterController.index);
 routes.post('/parameter', AuthMiddleware, ParameterController.store);
 routes.put('/parameter/:id', AuthMiddleware, ParameterController.update);
 routes.delete('/parameter/:id', AuthMiddleware, ParameterController.delete);
+
+routes.get('/consumption', AuthMiddleware, ConsumptionController.index);
+routes.get('/dashboard', AuthMiddleware, DashboardController.index);
 
 export default routes;

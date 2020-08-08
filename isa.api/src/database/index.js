@@ -5,9 +5,17 @@ import EquipmentType from '../app/models/EquipmentType';
 import OperationalArea from '../app/models/OperationalArea';
 import Equipment from '../app/models/Equipment';
 import Parameter from '../app/models/Parameter';
+import Consumption from '../app/models/Consumption';
 import databaseConfig from '../configs/database';
 
-const models = [User, EquipmentType, OperationalArea, Equipment, Parameter];
+const models = [
+  User,
+  EquipmentType,
+  OperationalArea,
+  Equipment,
+  Parameter,
+  Consumption,
+];
 class Database {
   constructor() {
     this.init();
