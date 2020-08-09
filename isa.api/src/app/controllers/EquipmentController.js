@@ -10,12 +10,12 @@ class EquipmentController {
         {
           model: OperationalArea,
           as: 'area',
-          attributes: ['id', 'name'],
+          attributes: ['id', 'title'],
         },
         {
           model: EquipmentType,
           as: 'type',
-          attributes: ['id', 'name'],
+          attributes: ['id', 'title'],
         },
       ],
     });

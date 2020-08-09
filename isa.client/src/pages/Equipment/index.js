@@ -36,6 +36,7 @@ class Equipment extends Component {
           <table className="table table-sm table-striped table-hover">
             <thead>
               <tr>
+                <th>Equipamento</th>
                 <th>Tag</th>
                 <th>Tipo</th>
                 <th>Localidade</th>
@@ -48,9 +49,10 @@ class Equipment extends Component {
             <tbody>
               {equipments.map((equipment) => (
                 <tr key={equipment.id}>
+                  <td>{equipment.name}</td>
                   <td>{equipment.tag}</td>
-                  <td>{equipment.type.name}</td>
-                  <td>{equipment.area.name}</td>
+                  <td>{equipment.type.title}</td>
+                  <td>{equipment.area.title}</td>
                   <td>{equipment.active}</td>
                   <td>{equipment.createdAt}</td>
                   <td>
