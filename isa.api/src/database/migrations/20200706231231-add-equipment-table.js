@@ -20,11 +20,6 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },
-      plc_tag: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
       operational_area_id: {
         type: Sequelize.INTEGER,
         references: { model: 'operational_areas', key: 'id' },

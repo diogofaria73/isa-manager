@@ -4,7 +4,7 @@ class EquipmentType extends Model {
   static init(sequelize) {
     super.init(
       {
-        name: Sequelize.STRING,
+        title: Sequelize.STRING,
       },
       {
         sequelize,

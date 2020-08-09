@@ -38,9 +38,6 @@ class EquipmentController {
       tag: Yup.string()
         .required()
         .min(5),
-      plcTag: Yup.string()
-        .required()
-        .min(3),
       operational_area_id: Yup.number().required(),
       equipment_type_id: Yup.number().required(),
     });

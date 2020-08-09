@@ -7,7 +7,6 @@ class Equipment extends Model {
         name: Sequelize.STRING,
         tag: Sequelize.STRING,
         is_active: Sequelize.BOOLEAN,
-        plcTag: Sequelize.STRING,
       },
       {
         sequelize,

@@ -3,21 +3,21 @@ import EquipmentType from '../models/EquipmentType';
 
 class EquipmentTypeController {
   async index(req, res) {
-    const equipmentTypesList = await EquipmentType.findAll();
+    const types = await EquipmentType.findAll();
 
-    if (!equipmentTypesList)
+    if (!types)
       return res
         .status(200)
         .json({ error: 'Não existe nenhum equipamento cadastrado' });
 
     return res.json({
-      equipmentTypesList,
+      types,
     });
   }
 
   async store(req, res) {
     const schema = Yup.object().shape({
-      name: Yup.string().required(),
+      title: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -27,37 +27,37 @@ class EquipmentTypeController {
     }
 
     const equipmentTypeExists = await EquipmentType.findOne({
-      where: { name: req.body.name },
+      where: { title: req.body.title },
     });
 
     if (equipmentTypeExists)
       return res.status(400).json({ error: 'O Tipo de Equipamento já existe' });
 
-    const { id, name } = await EquipmentType.create(req.body);
+    const { id, title } = await EquipmentType.create(req.body);
 
     return res.json({
       id,
-      name,
+      title,
     });
   }
 
   async update(req, res) {
     const schema = Yup.object().shape({
-      name: Yup.string().required(),
+      title: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body)))
       return res.status(400).json({ error: 'Verifique os dados digitados' });
 
-    const equipmentTypeName = req.body.tag;
+    const equipmentTypeTitle = req.body.tag;
     const equipmentType = await EquipmentType.findByPk(req.params.id);
 
-    if (equipmentTypeName && equipmentTypeName !== equipmentType.name) {
-      const equipmentTypeNameExists = await EquipmentType.findOne({
-        where: { name: equipmentTypeName },
+    if (equipmentTypeTitle && equipmentTypeTitle !== equipmentType.title) {
+      const equipmentTypeTitleExists = await EquipmentType.findOne({
+        where: { title: equipmentTypeTitle },
       });
 
-      if (equipmentTypeNameExists) {
+      if (equipmentTypeTitleExists) {
         return res.status(400).json({
           error: 'Já existe um tipo de equipamento cadastrado com este nome',
         });
@@ -66,11 +66,11 @@ class EquipmentTypeController {
 
     await equipmentType.update(req.body);
 
-    const { id, name } = await EquipmentType.findByPk(req.params.id);
+    const { id, title } = await EquipmentType.findByPk(req.params.id);
 
     return res.json({
       id,
-      name,
+      title,
     });
   }
 

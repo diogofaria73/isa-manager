@@ -3,21 +3,21 @@ import OperationalArea from '../models/OperationalArea';
 
 class OperationalAreaController {
   async index(req, res) {
-    const operationalAreaList = await OperationalArea.findAll();
+    const areas = await OperationalArea.findAll();
 
-    if (!operationalAreaList)
+    if (!areas)
       return res
         .status(400)
         .json({ error: 'Não existem areas operacionais cadatradas' });
 
     return res.json({
-      operationalAreaList,
+      areas,
     });
   }
 
   async store(req, res) {
     const schema = Yup.object().shape({
-      name: Yup.string().required(),
+      title: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -25,7 +25,7 @@ class OperationalAreaController {
     }
 
     const operationalAreaExist = await OperationalArea.findOne({
-      where: { name: req.body.name },
+      where: { title: req.body.title },
     });
 
     if (operationalAreaExist)
@@ -33,28 +33,31 @@ class OperationalAreaController {
         .status(400)
         .json({ error: 'Esta area operacional já está cadastrada' });
 
-    const { id, name } = await OperationalArea.create(req.body);
+    const { id, title } = await OperationalArea.create(req.body);
 
     return res.json({
       id,
-      name,
+      title,
     });
   }
 
   async update(req, res) {
     const schema = Yup.object().shape({
-      name: Yup.string().required(),
+      title: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body)))
       return res.status(400).json({ error: 'Verifique os dados digitados' });
 
-    const operationalAreaName = req.body.name;
+    const operationalAreaTitle = req.body.title;
     const operationalArea = await OperationalArea.findByPk(req.params.id);
 
-    if (operationalAreaName && operationalAreaName !== operationalArea.name) {
+    if (
+      operationalAreaTitle &&
+      operationalAreaTitle !== operationalArea.title
+    ) {
       const operationalAreaExists = await OperationalArea.findOne({
-        where: { name: operationalAreaName },
+        where: { title: operationalAreaTitle },
       });
 
       if (operationalAreaExists) {
@@ -66,11 +69,11 @@ class OperationalAreaController {
 
     await operationalArea.update(req.body);
 
-    const { id, name } = await OperationalArea.findByPk(req.params.id);
+    const { id, title } = await OperationalArea.findByPk(req.params.id);
 
     return res.json({
       id,
-      name,
+      title,
     });
   }
 
