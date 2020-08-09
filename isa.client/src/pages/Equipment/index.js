@@ -12,18 +12,9 @@ class Equipment extends Component {
   async componentDidMount() {
     const response = await api.get('equipment');
 
-    const data = response.data.equipmentList.map((equipment) => ({
-      ...equipment,
-      // createdAt: format(equipment.createdAt, 'dd/MM/YYYY HH:mm', {
-      //   locale: pt,
-      //   timeZone: 'America/Sao_Paulo',
-      // }),
-    }));
+    const data = response.data.equipmentList;
 
-    // format(addedDate, 'dd/MM/YYYY HH:mm', {
-    //   timeZone: 'America/Sao_Paulo',
-    // });
-
+    console.log(data);
     this.setState({ equipments: data });
   }
 
@@ -41,7 +32,7 @@ class Equipment extends Component {
       <div className="mt-4">
         <h3>Lista de Equipamentos</h3>
         <EquipmentFilter />
-        <section className="align-baseline">
+        <section className="h-100 align-baseline">
           <table className="table table-sm table-striped table-hover">
             <thead>
               <tr>
@@ -49,7 +40,6 @@ class Equipment extends Component {
                 <th>Tipo</th>
                 <th>Localidade</th>
                 <th>Ativo</th>
-                <th>Tag CLP</th>
                 <th>Data Cadastro</th>
                 <th>Editar</th>
                 <th>Apagar</th>
@@ -62,7 +52,6 @@ class Equipment extends Component {
                   <td>{equipment.type.name}</td>
                   <td>{equipment.area.name}</td>
                   <td>{equipment.active}</td>
-                  <td>{equipment.plcTag}</td>
                   <td>{equipment.createdAt}</td>
                   <td>
                     <span
