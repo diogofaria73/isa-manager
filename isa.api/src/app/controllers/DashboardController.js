@@ -6,10 +6,10 @@ class DashboardController {
   // Exibição da tela inicial de Dashboard.
   async index(req, res) {
     const operationalAreaList = await OperationalArea.findAll({
-      order: [['name', 'asc']],
+      order: [['title', 'asc']],
     });
     const equipmentTypeList = await EquipmentType.findAll({
-      order: [['name', 'asc']],
+      order: [['title', 'asc']],
     });
     const equipmentList = await Equipment.findAll({
       order: [['tag', 'asc']],
