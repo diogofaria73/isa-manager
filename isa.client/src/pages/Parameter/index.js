@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import api from '../../services/api';
 
@@ -46,9 +47,13 @@ export default function Parameter() {
         </table>
         <div className="align-baseline d-flex justify-content-end">
           <div className="btn-group">
-            <button type="button" className="btn btn-secondary btn-sm">
+            <Link
+              to="/parameter/register"
+              type="button"
+              className="btn btn-secondary btn-sm"
+            >
               <BsFillPlusCircleFill size={16} color="#FFF" /> Adicionar
-            </button>
+            </Link>
           </div>
         </div>
       </section>

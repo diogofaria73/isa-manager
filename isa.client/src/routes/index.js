@@ -5,10 +5,14 @@ import Dashboard from '../pages/Dashboard';
 import Equipment from '../pages/Equipment';
 import EquipmentRegister from '../pages/Equipment/Register';
 import EquipmentType from '../pages/EquipmentType';
+import EquipmentTypeRegister from '../pages/EquipmentType/Register';
 import OperationalArea from '../pages/OperationalArea';
+import OperationalAreaRegister from '../pages/OperationalArea/Register';
 import SignIn from '../pages/SignIn';
 import Parameter from '../pages/Parameter';
+import ParameterRegister from '../pages/Parameter/Register';
 import User from '../pages/User';
+import UserRegister from '../pages/User/Register';
 import Consumption from '../pages/Consumption';
 
 export default function Routes() {
@@ -24,9 +28,28 @@ export default function Routes() {
         isPrivate
       />
       <Route path="/type" exact component={EquipmentType} isPrivate />
+      <Route
+        path="/type/register"
+        exact
+        component={EquipmentTypeRegister}
+        isPrivate
+      />
       <Route path="/area" exact component={OperationalArea} isPrivate />
+      <Route
+        path="/area/register"
+        exact
+        component={OperationalAreaRegister}
+        isPrivate
+      />
       <Route path="/parameter" exact component={Parameter} isPrivate />
+      <Route
+        path="/parameter/register"
+        exact
+        component={ParameterRegister}
+        isPrivate
+      />
       <Route path="/user" exact component={User} isPrivate />
+      <Route path="/user/register" exact component={UserRegister} isPrivate />
       <Route path="/consumption" exact component={Consumption} isPrivate />
     </Switch>
   );

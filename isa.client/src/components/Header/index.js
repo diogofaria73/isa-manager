@@ -20,7 +20,7 @@ export default function Header() {
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav ml-auto align-content-between">
             <li className="nav-item">
-              <a className="nav-link">KPIs</a>
+              <a className="nav-link" href="/dashboard">KPIs</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/consumption">Consumo</a>

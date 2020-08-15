@@ -1,7 +1,7 @@
 import React from 'react';
 import api from '../../services/api';
 import { BsSearch } from 'react-icons/bs';
-import { Form, Input, Select } from '@rocketseat/unform';
+import { Input } from '@rocketseat/unform';
 
 class DashboardFilter extends React.Component {
   constructor(props) {
