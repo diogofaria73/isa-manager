@@ -1,5 +1,7 @@
 import React from 'react';
 import api from '../../services/api';
+import { BsSearch } from 'react-icons/bs';
+import { Form, Input, Select } from '@rocketseat/unform';
 
 class DashboardFilter extends React.Component {
   constructor(props) {
@@ -77,8 +79,33 @@ class DashboardFilter extends React.Component {
               ))}
             </select>
           </div>
+
+        </div>
+        <div className="row mt-3 align-items-center">
           <div className="col">
-            <input type="submit" value="Filtrar" />
+            <label>Data Inicial:</label>
+            <Input
+            className="form-control"
+            name="start_date"
+            type="text"
+            placeholder="Data Inicial"
+            />
+          </div>
+          <div className="col">
+            <label>Data Final:</label>
+            <Input
+            className="form-control"
+            name="end_date"
+            type="text"
+            placeholder="Data Inicial"
+            />
+          </div>
+          <div className="col">
+              <div className="btn-group">
+                <button type="button" className="btn btn-secondary btn-sm">
+                  <BsSearch size={12} color="#FFF" /> Buscar
+                </button>
+              </div>
           </div>
         </div>
       </form>
