@@ -77,6 +77,23 @@ class OperationalAreaController {
     });
   }
 
+  async edit(req, res) {
+    const operationalArea = await OperationalArea.findByPk(req.params.id);
+
+    if (!operationalArea) {
+      return res
+        .status(400)
+        .json({ error: 'Já existe uma área operacional com este nome' });
+    }
+
+    const { id, title } = operationalArea;
+
+    return res.json({
+      id,
+      title,
+    });
+  }
+
   async delete(req, res) {
     try {
       await OperationalArea.destroy({

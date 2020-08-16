@@ -20,7 +20,24 @@ export function* createOperationalArea({ payload }) {
 
     history.push('/area');
   } catch (error) {
-    toast.error(`Tivemos um problema para cadastrar o tipo de equipamento`);
+    toast.error(`Tivemos um problema para cadastrar a área operacional`);
+    yield put(operationalAreaFailure());
+  }
+}
+
+export function* updateOperationalArea({ payload }) {
+  try {
+    const response = yield call(api.put, 'operationalArea', payload.data);
+
+    toast.success(
+      `Area operacional ${response.data.title} foi editada com sucesso`
+    );
+
+    yield put(createOperationalAreaSuccess(response.data));
+
+    history.push('/area');
+  } catch (error) {
+    toast.error(`Tivemos um problema para cadastrar a área operacional`);
     yield put(operationalAreaFailure());
   }
 }
@@ -29,5 +46,9 @@ export default all([
   takeLatest(
     '@operationalArea/CREATE_OPERATIONAL_AREA_REQUEST',
     createOperationalArea
+  ),
+  takeLatest(
+    '@operationalArea/UPDATE_OPERATIONAL_AREA_REQUEST',
+    updateOperationalArea
   ),
 ]);

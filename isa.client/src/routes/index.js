@@ -8,6 +8,7 @@ import EquipmentType from '../pages/EquipmentType';
 import EquipmentTypeRegister from '../pages/EquipmentType/Register';
 import OperationalArea from '../pages/OperationalArea';
 import OperationalAreaRegister from '../pages/OperationalArea/Register';
+import OperationalAreaEdit from '../pages/OperationalArea/Edit';
 import SignIn from '../pages/SignIn';
 import Parameter from '../pages/Parameter';
 import ParameterRegister from '../pages/Parameter/Register';
@@ -39,6 +40,12 @@ export default function Routes() {
         path="/area/register"
         exact
         component={OperationalAreaRegister}
+        isPrivate
+      />
+      <Route
+        path="/area/edit"
+        exact
+        component={OperationalAreaEdit}
         isPrivate
       />
       <Route path="/parameter" exact component={Parameter} isPrivate />

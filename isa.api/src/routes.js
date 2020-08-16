@@ -31,6 +31,11 @@ routes.delete(
 );
 
 routes.get('/operationalArea', AuthMiddleware, OperationalAreaController.index);
+routes.get(
+  '/operationalArea/edit/:id',
+  AuthMiddleware,
+  OperationalAreaController.edit
+);
 routes.post(
   '/operationalArea',
   AuthMiddleware,
