@@ -78,19 +78,16 @@ class OperationalAreaController {
   }
 
   async edit(req, res) {
-    const operationalArea = await OperationalArea.findByPk(req.params.id);
+    const area = await OperationalArea.findByPk(req.params.id);
 
-    if (!operationalArea) {
+    if (!area) {
       return res
         .status(400)
         .json({ error: 'Já existe uma área operacional com este nome' });
     }
 
-    const { id, title } = operationalArea;
-
     return res.json({
-      id,
-      title,
+      area,
     });
   }
 

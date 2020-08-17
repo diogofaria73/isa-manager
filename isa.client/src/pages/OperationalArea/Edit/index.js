@@ -18,7 +18,7 @@ export default function OperationalAreaEdit() {
   useEffect(() => {
     async function loadArea() {
       const response = await api.get('/operationalArea/edit/1');
-      const data = response.data.areas;
+      const data = response.data.area;
       setData(data);
     }
     loadArea();
@@ -38,12 +38,7 @@ export default function OperationalAreaEdit() {
       >
         <h3>Editar Área Operacional</h3>
         <div className="row-cols mt-3">
-          <Input
-            className="form-control"
-            name="id"
-            type="text"
-            placeholder="Id"
-          />
+          <Input className="form-control" name="id" type="hidden" />
           <Input
             className="form-control"
             name="title"

@@ -35,11 +35,11 @@ export default function OperationalArea() {
                 <td>{area.updatedAt}</td>
                 <td>
                   <Link
-                    to="/area/edit"
+                    to="/area/edit/"
                     type="button"
                     className="btn btn-secondary btn-sm"
                   >
-                    <span className="fa fa-edit" />
+                    <span className="fa fa-edit"/>
                   </Link>
                 </td>
                 <td>
