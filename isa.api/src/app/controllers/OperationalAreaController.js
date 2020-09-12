@@ -3,7 +3,9 @@ import OperationalArea from '../models/OperationalArea';
 
 class OperationalAreaController {
   async index(req, res) {
-    const areas = await OperationalArea.findAll();
+    const areas = await OperationalArea.findAll({
+      order: [['title', 'asc']],
+    });
 
     if (!areas)
       return res
@@ -83,7 +85,7 @@ class OperationalAreaController {
     if (!area) {
       return res
         .status(400)
-        .json({ error: 'Já existe uma área operacional com este nome' });
+        .json({ error: 'Área operacional não encontrada.' });
     }
 
     return res.json({

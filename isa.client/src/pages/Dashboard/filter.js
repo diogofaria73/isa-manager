@@ -54,7 +54,7 @@ class DashboardFilter extends React.Component {
         <div className="row">
           <div className="col">
             <label>Áreas Operacionais: </label>
-            <select value={this.state.value} onChange={this.handleChange} class="form-control">
+            <select value={this.state.value} onChange={this.handleChange} className="form-control">
               <option value="0">Todos</option>
               { this.state.operationalAreas.map((operationalArea) => (
                 <option value={operationalArea.id}>{operationalArea.title}</option>
@@ -63,7 +63,7 @@ class DashboardFilter extends React.Component {
           </div>
           <div className="col">
             <label>Tipos de Equipamentos: </label>
-            <select value={this.state.value} onChange={this.handleChange} class="form-control">
+            <select value={this.state.value} onChange={this.handleChange} className="form-control">
               <option value="0">Todos</option>
               { this.state.equipmentTypes.map((equipmentType) => (
                 <option value={equipmentType.id}>{equipmentType.title}</option>
@@ -72,7 +72,7 @@ class DashboardFilter extends React.Component {
           </div>
           <div className="col">
             <label>Equipamentos: </label>
-            <select value={this.state.value} onChange={this.handleChange} class="form-control">
+            <select value={this.state.value} onChange={this.handleChange} className="form-control">
               <option value="0">Todos</option>
               { this.state.equipments.map((equipment) => (
                 <option value={equipment.id}>{equipment.tag}</option>

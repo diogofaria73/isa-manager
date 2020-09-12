@@ -43,7 +43,7 @@ export default function Routes() {
         isPrivate
       />
       <Route
-        path="/area/edit"
+        path="/area/edit/:id"
         exact
         component={OperationalAreaEdit}
         isPrivate

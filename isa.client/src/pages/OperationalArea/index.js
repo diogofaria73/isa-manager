@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import api from '~/services/api';
+import history from '~/services/history';
 
-export default function OperationalArea() {
+function OperationalArea() {
   const [areas, setAreas] = useState([]);
 
   useEffect(() => {
@@ -14,6 +15,10 @@ export default function OperationalArea() {
     }
     loadAreas();
   }, []);
+
+  const startEdit = (id) => {
+    history.push(`/area/edit/${id}`);
+  };
 
   return (
     <div className="mt-4">
@@ -35,15 +40,21 @@ export default function OperationalArea() {
                 <td>{area.updatedAt}</td>
                 <td>
                   <Link
-                    to="/area/edit/"
+                    onClick={() => startEdit(area.id)}
                     type="button"
-                    className="btn btn-secondary btn-sm"
+                    className="btn"
                   >
-                    <span className="fa fa-edit"/>
+                    <span className="fa fa-edit" />
                   </Link>
                 </td>
                 <td>
-                  <span className="fa fa-trash" />
+                  <Link
+                    onClick={() => startEdit(area.id)}
+                    type="button"
+                    className="btn"
+                  >
+                    <span className="fa fa-trash" />
+                  </Link>
                 </td>
               </tr>
             ))}
@@ -64,3 +75,5 @@ export default function OperationalArea() {
     </div>
   );
 }
+
+export default withRouter(OperationalArea);

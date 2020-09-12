@@ -27,7 +27,11 @@ export function* createOperationalArea({ payload }) {
 
 export function* updateOperationalArea({ payload }) {
   try {
-    const response = yield call(api.put, 'operationalArea', payload.data);
+    const response = yield call(
+      api.put,
+      `operationalArea/${payload.data.id}`,
+      payload.data
+    );
 
     toast.success(
       `Area operacional ${response.data.title} foi editada com sucesso`
@@ -37,7 +41,7 @@ export function* updateOperationalArea({ payload }) {
 
     history.push('/area');
   } catch (error) {
-    toast.error(`Tivemos um problema para cadastrar a área operacional`);
+    toast.error(`Tivemos um problema para editar a área operacional`);
     yield put(operationalAreaFailure());
   }
 }
