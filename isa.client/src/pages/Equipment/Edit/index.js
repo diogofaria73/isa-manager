@@ -26,7 +26,7 @@ export default function EquipmentEdit(props) {
   const [equipment, setEquipment] = useState([]);
   const [areas, setAreas] = useState([]);
   const [types, setTypes] = useState([]);
-  const [equipmentState, setEquipmentState] = useState([])
+  const [equipmentState, setEquipmentState] = useState([]);
 
   useEffect(() => {
     async function loadEquipment() {
@@ -50,8 +50,8 @@ export default function EquipmentEdit(props) {
     loadAreas();
     loadTypes();
     const stateList = [
-      { id: '0', title: 'Inativo' },
       { id: '1', title: 'Ativo' },
+      { id: '0', title: 'Inativo' },
     ];
     setEquipmentState(stateList);
   }, []);
