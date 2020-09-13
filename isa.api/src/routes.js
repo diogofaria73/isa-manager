@@ -58,6 +58,7 @@ routes.delete(
 );
 
 routes.get('/equipment', AuthMiddleware, EquipmentController.index);
+routes.get('/equipment/edit/:id', AuthMiddleware, EquipmentController.edit);
 routes.post('/equipment', AuthMiddleware, EquipmentController.store);
 routes.put('/equipment/:id', AuthMiddleware, EquipmentController.update);
 routes.delete('/equipment/:id', AuthMiddleware, EquipmentController.delete);

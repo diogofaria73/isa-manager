@@ -4,6 +4,8 @@ import Route from './Route';
 import Dashboard from '../pages/Dashboard';
 import Equipment from '../pages/Equipment';
 import EquipmentRegister from '../pages/Equipment/Register';
+import EquipmentEdit from '../pages/Equipment/Edit';
+import EquipmentDelete from '../pages/Equipment/Delete';
 import EquipmentType from '../pages/EquipmentType';
 import EquipmentTypeRegister from '../pages/EquipmentType/Register';
 import EquipmentTypeEdit from '../pages/EquipmentType/Edit';
@@ -31,6 +33,18 @@ export default function Routes() {
         path="/equipment/register"
         exact
         component={EquipmentRegister}
+        isPrivate
+      />
+      <Route
+        path="/equipment/edit/:id"
+        exact
+        component={EquipmentEdit}
+        isPrivate
+      />
+      <Route
+        path="/equipment/delete/:id"
+        exact
+        component={EquipmentDelete}
         isPrivate
       />
       <Route path="/type" exact component={EquipmentType} isPrivate />

@@ -35,7 +35,7 @@ export default function User() {
               <tr key={user.id}>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>{user.is_admin}</td>
+                <td>{user.is_admin ? 'Sim' : 'Não'}</td>
                 <td>{user.updatedAt}</td>
                 <td>
                   <span className="fa fa-edit" />

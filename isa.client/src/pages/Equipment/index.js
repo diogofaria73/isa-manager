@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import EquipmentFilter from '../../components/Equipment/Filter/EquipmentFilter';
 import api from '~/services/api';
+import history from '~/services/history';
 
 export default function Equipment() {
   const [equipments, setEquipment] = useState([]);
@@ -15,6 +16,14 @@ export default function Equipment() {
     }
     loadEquipments();
   }, []);
+
+  const startEdit = (id) => {
+    history.push(`/equipment/edit/${id}`);
+  };
+
+  const startDelete = (id) => {
+    history.push(`/equipment/delete/${id}`);
+  };
 
   return (
     <div className="mt-4">
@@ -41,13 +50,25 @@ export default function Equipment() {
                 <td>{equipment.tag}</td>
                 <td>{equipment.type.title}</td>
                 <td>{equipment.area.title}</td>
-                <td>{equipment.active}</td>
+                <td>{equipment.is_active ? 'Sim' : 'Não'}</td>
                 <td>{equipment.createdAt}</td>
                 <td>
-                  <span className="fa fa-edit" />
+                  <Link
+                    onClick={() => startEdit(equipment.id)}
+                    type="button"
+                    className="btn"
+                  >
+                    <span className="fa fa-edit" />
+                  </Link>
                 </td>
                 <td>
-                  <span className="fa fa-trash" />
+                  <Link
+                    onClick={() => startDelete(equipment.id)}
+                    type="button"
+                    className="btn"
+                  >
+                    <span className="fa fa-trash" />
+                  </Link>
                 </td>
               </tr>
             ))}

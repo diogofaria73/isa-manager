@@ -75,9 +75,8 @@ class EquipmentController {
       tag: Yup.string()
         .min(5)
         .required(),
-      plcTag: Yup.string()
-        .min(3)
-        .required(),
+      operational_area_id: Yup.number().required(),
+      equipment_type_id: Yup.number().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -102,31 +101,38 @@ class EquipmentController {
 
     await equipment.update(req.body);
 
-    const { id, name, tag, plcTag, area, type } = await Equipment.findByPk(
-      req.params.id,
-      {
-        include: [
-          {
-            model: OperationalArea,
-            as: 'area',
-            attributes: ['id', 'name'],
-          },
-          {
-            model: EquipmentType,
-            as: 'type',
-            attributes: ['id', 'name'],
-          },
-        ],
-      }
-    );
+    /* const { id, name, tag, area, type }  = await Equipment.findByPk(req.params.id, {
+      include: [
+        {
+          model: OperationalArea,
+          as: 'area',
+          attributes: ['id', 'name'],
+        },
+        {
+          model: EquipmentType,
+          as: 'type',
+          attributes: ['id', 'name'],
+        },
+      ],
+    }); */
+    const { id, name, tag } = await Equipment.findByPk(req.params.id);
 
     return res.json({
       id,
       name,
       tag,
-      plcTag,
-      area,
-      type,
+    });
+  }
+
+  async edit(req, res) {
+    const equipment = await Equipment.findByPk(req.params.id);
+
+    if (!equipment) {
+      return res.status(400).json({ error: 'Equipamento não encontrado.' });
+    }
+
+    return res.json({
+      equipment,
     });
   }
 

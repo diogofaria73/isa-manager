@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Form, Input, Select } from '@rocketseat/unform';
 import api from '~/services/api';
-import { createEquipmentRequest } from '~/store/modules/equipment/actions';
+import { updateEquipmentRequest } from '~/store/modules/equipment/actions';
 
 const schema = Yup.object().shape({
+  id: Yup.number(),
   name: Yup.string().required('O Campo nome é obrigatório'),
   tag: Yup.string().required('O Campo TAG é obrigatório').min(3),
   equipment_type_id: Yup.number().required(
@@ -20,13 +21,21 @@ const schema = Yup.object().shape({
   ),
 });
 
-export default function EquipmentRegister() {
+export default function EquipmentEdit(props) {
   const dispatch = useDispatch();
+  const [equipment, setEquipment] = useState([]);
   const [areas, setAreas] = useState([]);
   const [types, setTypes] = useState([]);
-  const [equipmentState, setEquipmentState] = useState([]);
+  const [equipmentState, setEquipmentState] = useState([])
 
   useEffect(() => {
+    async function loadEquipment() {
+      const { id } = props.match.params;
+      const response = await api.get(`/equipment/edit/${id}`);
+      const data = response.data.equipment;
+      setEquipment(data);
+    }
+    loadEquipment();
     async function loadAreas() {
       const response = await api.get('operationalArea');
       const data = response.data.areas;
@@ -41,21 +50,27 @@ export default function EquipmentRegister() {
     loadAreas();
     loadTypes();
     const stateList = [
-      { id: '1', title: 'Ativo' },
       { id: '0', title: 'Inativo' },
+      { id: '1', title: 'Ativo' },
     ];
     setEquipmentState(stateList);
   }, []);
 
   function handleSubmit(data) {
-    dispatch(createEquipmentRequest(data));
+    dispatch(updateEquipmentRequest(data));
   }
 
   return (
     <>
-      <Form schema={schema} onSubmit={handleSubmit} className="mt-5">
-        <h3>Novo Equipamento:</h3>
+      <Form
+        schema={schema}
+        onSubmit={handleSubmit}
+        initialData={equipment}
+        className="mt-5"
+      >
+        <h3>Editar Equipamento:</h3>
         <div className="row-cols mt-3">
+          <Input className="form-control" name="id" type="hidden" />
           <Input
             className="form-control"
             name="name"
@@ -83,8 +98,8 @@ export default function EquipmentRegister() {
           <Select
             className="form-control mt-3"
             name="is_active"
-            options={equipmentState}
             placeholder="Status do Equipamento"
+            options={equipmentState}
           />
           <hr />
           <section className="row d-flex justify-content-end">
