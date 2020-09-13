@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import api from '../../services/api';
+import history from '~/services/history';
 
 export default function EquipmentType() {
   const [equipmentTypes, setEquipmentTypes] = useState([]);
@@ -14,6 +15,14 @@ export default function EquipmentType() {
     }
     loadEquipmentTypes();
   }, []);
+
+  const startEdit = (id) => {
+    history.push(`/type/edit/${id}`);
+  };
+
+  const startDelete = (id) => {
+    history.push(`/type/delete/${id}`);
+  };
 
   return (
     <div className="mt-4">
@@ -34,10 +43,22 @@ export default function EquipmentType() {
                 <td>{equipmentType.title}</td>
                 <td>{equipmentType.updatedAt}</td>
                 <td>
-                  <span className="fa fa-edit" />
+                  <Link
+                    onClick={() => startEdit(equipmentType.id)}
+                    type="button"
+                    className="btn"
+                  >
+                    <span className="fa fa-edit" />
+                  </Link>
                 </td>
                 <td>
-                  <span className="fa fa-trash" />
+                  <Link
+                    onClick={() => startDelete(equipmentType.id)}
+                    type="button"
+                    className="btn"
+                  >
+                    <span className="fa fa-trash" />
+                  </Link>
                 </td>
               </tr>
             ))}

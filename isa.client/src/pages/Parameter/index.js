@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import api from '../../services/api';
+import history from '~/services/history';
 
 export default function Parameter() {
   const [parameters, setParameters] = useState([]);
@@ -14,6 +15,14 @@ export default function Parameter() {
     }
     loadParameters();
   }, []);
+
+  const startEdit = (id) => {
+    history.push(`/parameter/edit/${id}`);
+  };
+
+  const startDelete = (id) => {
+    history.push(`/parameter/delete/${id}`);
+  };
 
   return (
     <div className="mt-4">
@@ -36,10 +45,22 @@ export default function Parameter() {
                 <td>{parameter.price}</td>
                 <td>{parameter.updatedAt}</td>
                 <td>
-                  <span className="fa fa-edit" />
+                  <Link
+                    onClick={() => startEdit(parameter.id)}
+                    type="button"
+                    className="btn"
+                  >
+                    <span className="fa fa-edit" />
+                  </Link>
                 </td>
                 <td>
-                  <span className="fa fa-trash" />
+                  <Link
+                    onClick={() => startDelete(parameter.id)}
+                    type="button"
+                    className="btn"
+                  >
+                    <span className="fa fa-trash" />
+                  </Link>
                 </td>
               </tr>
             ))}

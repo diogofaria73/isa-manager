@@ -19,6 +19,10 @@ export default function equipmentType(state = INITIAL_STATE, action) {
         draft.equipmentType = action.payload.equipmentType;
         break;
       }
+      case '@equipmentType/DELETE_EQUIPMENT_TYPE_REQUEST': {
+        draft.equipmentType = action.payload.equipmentType;
+        break;
+      }
       default:
     }
   });

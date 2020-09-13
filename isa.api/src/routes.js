@@ -18,6 +18,11 @@ routes.get('/user', AuthMiddleware, UserController.index);
 routes.post('/user', UserController.store);
 
 routes.get('/equipmentType', AuthMiddleware, EquipmentTypeController.index);
+routes.get(
+  '/equipmentType/edit/:id',
+  AuthMiddleware,
+  EquipmentTypeController.edit
+);
 routes.post('/equipmentType', AuthMiddleware, EquipmentTypeController.store);
 routes.put(
   '/equipmentType/:id',
@@ -58,6 +63,7 @@ routes.put('/equipment/:id', AuthMiddleware, EquipmentController.update);
 routes.delete('/equipment/:id', AuthMiddleware, EquipmentController.delete);
 
 routes.get('/parameter', AuthMiddleware, ParameterController.index);
+routes.get('/parameter/edit/:id', AuthMiddleware, ParameterController.edit);
 routes.post('/parameter', AuthMiddleware, ParameterController.store);
 routes.put('/parameter/:id', AuthMiddleware, ParameterController.update);
 routes.delete('/parameter/:id', AuthMiddleware, ParameterController.delete);
