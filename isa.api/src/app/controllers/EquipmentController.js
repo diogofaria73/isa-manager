@@ -101,26 +101,30 @@ class EquipmentController {
 
     await equipment.update(req.body);
 
-    /* const { id, name, tag, area, type }  = await Equipment.findByPk(req.params.id, {
-      include: [
-        {
-          model: OperationalArea,
-          as: 'area',
-          attributes: ['id', 'name'],
-        },
-        {
-          model: EquipmentType,
-          as: 'type',
-          attributes: ['id', 'name'],
-        },
-      ],
-    }); */
-    const { id, name, tag } = await Equipment.findByPk(req.params.id);
+    const { id, name, tag, area, type } = await Equipment.findByPk(
+      req.params.id,
+      {
+        include: [
+          {
+            model: OperationalArea,
+            as: 'area',
+            attributes: ['id', 'title'],
+          },
+          {
+            model: EquipmentType,
+            as: 'type',
+            attributes: ['id', 'title'],
+          },
+        ],
+      }
+    );
 
     return res.json({
       id,
       name,
       tag,
+      area,
+      type,
     });
   }
 
