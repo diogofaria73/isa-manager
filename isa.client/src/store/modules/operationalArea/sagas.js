@@ -46,6 +46,21 @@ export function* updateOperationalArea({ payload }) {
   }
 }
 
+export function* deleteOperationalArea({ payload }) {
+  try {
+    const response = yield call(api.delete, `operationalArea/${payload.id}`);
+
+    toast.success(`Area operacional excluída com sucesso`);
+
+    yield put(createOperationalAreaSuccess(response.data));
+
+    history.push('/area');
+  } catch (error) {
+    toast.error(`Tivemos um problema para excluir a área operacional`);
+    yield put(operationalAreaFailure());
+  }
+}
+
 export default all([
   takeLatest(
     '@operationalArea/CREATE_OPERATIONAL_AREA_REQUEST',
@@ -54,5 +69,9 @@ export default all([
   takeLatest(
     '@operationalArea/UPDATE_OPERATIONAL_AREA_REQUEST',
     updateOperationalArea
+  ),
+  takeLatest(
+    '@operationalArea/DELETE_OPERATIONAL_AREA_REQUEST',
+    deleteOperationalArea
   ),
 ]);

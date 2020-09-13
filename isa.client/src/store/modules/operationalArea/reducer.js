@@ -19,6 +19,10 @@ export default function operationalArea(state = INITIAL_STATE, action) {
         draft.operationalArea = action.payload.operationalArea;
         break;
       }
+      case '@operationalArea/DELETE_OPERATIONAL_AREA_REQUEST': {
+        draft.operationalArea = action.payload.operationalArea;
+        break;
+      }
       default:
     }
   });

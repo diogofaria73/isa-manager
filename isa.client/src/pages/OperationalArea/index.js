@@ -20,6 +20,10 @@ function OperationalArea() {
     history.push(`/area/edit/${id}`);
   };
 
+  const startDelete = (id) => {
+    history.push(`/area/delete/${id}`);
+  };
+
   return (
     <div className="mt-4">
       <h3>Lista de Áreas Operacionais</h3>
@@ -49,7 +53,7 @@ function OperationalArea() {
                 </td>
                 <td>
                   <Link
-                    onClick={() => startEdit(area.id)}
+                    onClick={() => startDelete(area.id)}
                     type="button"
                     className="btn"
                   >
