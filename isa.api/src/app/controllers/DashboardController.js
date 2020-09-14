@@ -24,6 +24,22 @@ class DashboardController {
       equipmentList,
     });
   }
+
+  // Método de teste para jogar dados para o gráfico da tela do dashboard.
+  async getPowerData(req, res) {
+    const powerData = [['Equipamento', 'Potência', 'Custo']];
+
+    const equipmentList = await Equipment.findAll({
+      order: [['tag', 'asc']],
+    });
+    equipmentList.forEach(eqp => {
+      powerData.push([eqp.tag, Math.random() * 100, Math.random() * 100]);
+    });
+
+    return res.status(200).json({
+      powerData,
+    });
+  }
 }
 
 export default new DashboardController();
