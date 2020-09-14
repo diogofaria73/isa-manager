@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
+import { format, parseISO } from 'date-fns';
 import EquipmentFilter from '../../components/Equipment/Filter/EquipmentFilter';
 import api from '~/services/api';
 import history from '~/services/history';
@@ -51,7 +52,11 @@ export default function Equipment() {
                 <td>{equipment.type.title}</td>
                 <td>{equipment.area.title}</td>
                 <td>{equipment.is_active ? 'Sim' : 'Não'}</td>
-                <td>{equipment.createdAt}</td>
+                <td>
+                  {format(parseISO(equipment.createdAt), 'dd/MM/YYY HH:mm', {
+                    timezone: 'America/Sao_Paulo',
+                  })}
+                </td>
                 <td>
                   <Link
                     onClick={() => startEdit(equipment.id)}

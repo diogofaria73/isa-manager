@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
+import { format, parseISO } from 'date-fns';
 import api from '../../services/api';
 import history from '~/services/history';
 
@@ -41,7 +42,15 @@ export default function EquipmentType() {
             {equipmentTypes.map((equipmentType) => (
               <tr key={equipmentType.id}>
                 <td>{equipmentType.title}</td>
-                <td>{equipmentType.updatedAt}</td>
+                <td>
+                  {format(
+                    parseISO(equipmentType.updatedAt),
+                    'dd/MM/YYY HH:mm',
+                    {
+                      timezone: 'America/Sao_Paulo',
+                    }
+                  )}
+                </td>
                 <td>
                   <Link
                     onClick={() => startEdit(equipmentType.id)}

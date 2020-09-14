@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
+import { format, parseISO } from 'date-fns';
 import api from '~/services/api';
 import history from '~/services/history';
 
@@ -41,7 +42,11 @@ function OperationalArea() {
             {areas.map((area) => (
               <tr key={area.id}>
                 <td>{area.title}</td>
-                <td>{area.updatedAt}</td>
+                <td>
+                  {format(parseISO(area.updatedAt), 'dd/MM/YYY HH:mm', {
+                    timezone: 'America/Sao_Paulo',
+                  })}
+                </td>
                 <td>
                   <Link
                     onClick={() => startEdit(area.id)}

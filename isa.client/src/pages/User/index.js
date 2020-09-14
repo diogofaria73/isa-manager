@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { format, parseISO } from 'date-fns';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import api from '~/services/api';
 
@@ -36,7 +37,11 @@ export default function User() {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.is_admin ? 'Sim' : 'Não'}</td>
-                <td>{user.updatedAt}</td>
+                <td>
+                  {format(parseISO(user.updatedAt), 'dd/MM/YYY HH:mm', {
+                    timezone: 'America/Sao_Paulo',
+                  })}
+                </td>
                 <td>
                   <span className="fa fa-edit" />
                 </td>
