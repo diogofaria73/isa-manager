@@ -31,7 +31,7 @@ export default function DashboardFilter() {
     const selData = {
       operational_area_id: '0',
       equipment_type_id: '0',
-    };
+    }
     setSelStatus(selData);
   }, []);
 

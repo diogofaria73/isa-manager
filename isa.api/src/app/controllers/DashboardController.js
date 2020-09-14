@@ -24,28 +24,6 @@ class DashboardController {
       equipmentList,
     });
   }
-
-  // TODO - Metodo de exemplo para geração de gráfico
-  async getPowerData(req, res) {
-    const powerData = [['Equipamento', 'Potência', 'Custo']];
-
-    const equipmentList = await Equipment.findAll({
-      order: [['tag', 'asc']],
-    });
-
-    equipmentList.forEach(equipment => {
-      const novoItem = [
-        equipment.tag,
-        Math.random() * 100,
-        Math.random() * 100,
-      ];
-      powerData.push(novoItem);
-    });
-
-    return res.status(200).json({
-      powerData,
-    });
-  }
 }
 
 export default new DashboardController();
