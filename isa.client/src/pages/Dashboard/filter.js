@@ -29,9 +29,19 @@ export default function DashboardFilter () {
     loadEquipments();
   }, []);
 
-  // function changeOperacionalArea(event) {
-  //  const area_id = event.target.value;
-  // }
+  // TODO - Ajustar método para pegar o valor do select de tipo de equipamento também.
+  function changeOperacionalArea(event) {
+    const area_id = event.target.value;
+    const data = {
+      operational_area_id: area_id,
+    }
+    async function loadEquipmentsByArea() {
+      const response = await api.post('equipment/findByAreaAndType', data);
+      const list = response.data.equipmentList;
+      setEquipments(list);
+    }
+    loadEquipmentsByArea();
+  }
 
   // handleSubmit(event) {
   // alert('xxxxxxx: ' + this.state.value);
@@ -43,7 +53,7 @@ export default function DashboardFilter () {
       <div className="row">
         <div className="col">
           <label>Áreas Operacionais: </label>
-          <select className="form-control">
+          <select className="form-control" onChange={changeOperacionalArea}>
             <option value="0">Todos</option>
             {areas.map((area) => (
               <option value={area.id}>{area.title}</option>

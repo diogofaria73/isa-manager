@@ -157,6 +157,34 @@ class EquipmentController {
         .json({ message: 'Não foi possivel deletar o equipamento' });
     }
   }
+
+  // TODO - Ajustar método para pegar o valor do select de tipo de equipamento também.
+  async findByAreaAndType(req, res) {
+    let equipmentList = [];
+    const schema = Yup.object().shape({
+      operational_area_id: Yup.number().required(),
+      // equipment_type_id: Yup.number().required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Dados de busca inválidos.' });
+    }
+
+    if (req.body.operational_area_id === '0') {
+      equipmentList = await Equipment.findAll();
+    } else {
+      equipmentList = await Equipment.findAll({
+        where: {
+          operational_area_id: req.body.operational_area_id,
+          // equipment_type_id: req.body.equipment_type_id,
+        },
+      });
+    }
+
+    return res.json({
+      equipmentList,
+    });
+  }
 }
 
 export default new EquipmentController();
