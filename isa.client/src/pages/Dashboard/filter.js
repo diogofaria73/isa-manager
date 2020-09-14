@@ -1,12 +1,13 @@
-import React , { useEffect, useState } from 'react';
-import api from '../../services/api';
+import React, { useEffect, useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
-import { Form, Input, Select } from '@rocketseat/unform';
+import { Form, Input } from '@rocketseat/unform';
+import api from '../../services/api';
 
-export default function DashboardFilter () {
+export default function DashboardFilter() {
   const [equipments, setEquipments] = useState([]);
   const [areas, setAreas] = useState([]);
   const [types, setTypes] = useState([]);
+  const [selStatus, setSelStatus] = useState([]);
 
   useEffect(() => {
     async function loadEquipments() {
@@ -27,14 +28,33 @@ export default function DashboardFilter () {
     loadAreas();
     loadTypes();
     loadEquipments();
+    const selData = {
+      operational_area_id: '0',
+      equipment_type_id: '0',
+    }
+    setSelStatus(selData);
   }, []);
 
-  // TODO - Ajustar método para pegar o valor do select de tipo de equipamento também.
-  function changeOperacionalArea(event) {
-    const area_id = event.target.value;
+  function changeOperacionalArea(e) {
     const data = {
-      operational_area_id: area_id,
+      operational_area_id: e.target.value,
+      equipment_type_id: selStatus.equipment_type_id,
+    };
+    setSelStatus(data);
+    async function loadEquipmentsByArea() {
+      const response = await api.post('equipment/findByAreaAndType', data);
+      const list = response.data.equipmentList;
+      setEquipments(list);
     }
+    loadEquipmentsByArea();
+  }
+
+  function changeEquipmentType(e) {
+    const data = {
+      operational_area_id: selStatus.operational_area_id,
+      equipment_type_id: e.target.value,
+    };
+    setSelStatus(data);
     async function loadEquipmentsByArea() {
       const response = await api.post('equipment/findByAreaAndType', data);
       const list = response.data.equipmentList;
@@ -62,7 +82,7 @@ export default function DashboardFilter () {
         </div>
         <div className="col">
           <label>Tipos de Equipamentos: </label>
-          <select className="form-control">
+          <select className="form-control" onChange={changeEquipmentType}>
             <option value="0">Todos</option>
             {types.map((type) => (
               <option value={type.id}>{type.title}</option>
