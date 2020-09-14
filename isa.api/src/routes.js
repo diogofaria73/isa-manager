@@ -76,5 +76,9 @@ routes.delete('/parameter/:id', AuthMiddleware, ParameterController.delete);
 
 routes.get('/consumption', AuthMiddleware, ConsumptionController.index);
 routes.get('/dashboard', AuthMiddleware, DashboardController.index);
-
+routes.post(
+  '/dashboard/getPowerData',
+  AuthMiddleware,
+  DashboardController.getPowerData
+);
 export default routes;
