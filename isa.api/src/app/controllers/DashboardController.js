@@ -40,6 +40,28 @@ class DashboardController {
       powerData,
     });
   }
+
+  // Método de teste para jogar dados para o gráfico da tela do dashboard.
+  async getDataChartJs(req, res) {
+    const labels = [];
+    const powers = [];
+    const costs = [];
+
+    const equipmentList = await Equipment.findAll({
+      order: [['tag', 'asc']],
+    });
+    equipmentList.forEach(eqp => {
+      labels.push([eqp.tag]);
+      powers.push(Math.random() * 100);
+      costs.push(Math.random() * 50);
+    });
+
+    return res.status(200).json({
+      labels,
+      powers,
+      costs,
+    });
+  }
 }
 
 export default new DashboardController();
