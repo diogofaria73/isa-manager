@@ -81,4 +81,9 @@ routes.post(
   AuthMiddleware,
   DashboardController.getPowerData
 );
+routes.post(
+  '/dashboard/getDataChartJs',
+  AuthMiddleware,
+  DashboardController.getDataChartJs
+);
 export default routes;
