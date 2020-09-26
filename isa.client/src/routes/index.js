@@ -21,6 +21,7 @@ import ParameterEdit from '../pages/Parameter/Edit';
 import ParameterDelete from '../pages/Parameter/Delete';
 import User from '../pages/User';
 import UserRegister from '../pages/User/Register';
+import UserDelete from '../pages/User/Delete';
 import Consumption from '../pages/Consumption';
 
 export default function Routes() {
@@ -106,6 +107,7 @@ export default function Routes() {
       />
       <Route path="/user" exact component={User} isPrivate />
       <Route path="/user/register" exact component={UserRegister} isPrivate />
+      <Route path="/user/delete/:id" exact component={UserDelete} isPrivate />
       <Route path="/consumption" exact component={Consumption} isPrivate />
     </Switch>
   );

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
-import { Form, Input } from '@rocketseat/unform';
+import { Form, Input, Select } from '@rocketseat/unform';
 import { createUserRequest } from '~/store/modules/user/actions';
 
 const schema = Yup.object().shape({
@@ -14,6 +14,16 @@ const schema = Yup.object().shape({
 
 export default function UserRegister() {
   const dispatch = useDispatch();
+
+  const [adminState, setAdminState] = useState([]);
+
+  useEffect(() => {
+    const adminList = [
+      { id: '1', title: 'Sim' },
+      { id: '0', title: 'Não' },
+    ];
+    setAdminState(adminList);
+  }, []);
 
   function handleSubmit(data) {
     dispatch(createUserRequest(data));
@@ -42,10 +52,10 @@ export default function UserRegister() {
             type="password"
             placeholder="Senha"
           />
-          <Input
+          <Select
             className="form-control mt-3"
             name="is_admin"
-            type="text"
+            options={adminState}
             placeholder="Administrador"
           />
           <hr />

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import api from '~/services/api';
+import history from '~/services/history';
 
 export default function User() {
   const [users, setUser] = useState([]);
@@ -15,6 +16,10 @@ export default function User() {
     }
     loadUsers();
   }, []);
+
+  const startDelete = (id) => {
+    history.push(`/user/delete/${id}`);
+  };
 
   return (
     <div className="mt-4">
@@ -46,7 +51,13 @@ export default function User() {
                   <span className="fa fa-edit" />
                 </td>
                 <td>
-                  <span className="fa fa-trash" />
+                  <Link
+                    onClick={() => startDelete(user.id)}
+                    type="button"
+                    className="btn"
+                  >
+                    <span className="fa fa-trash" />
+                  </Link>
                 </td>
               </tr>
             ))}

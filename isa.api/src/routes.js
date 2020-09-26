@@ -16,6 +16,8 @@ routes.post('/sessions', SessionController.store);
 
 routes.get('/user', AuthMiddleware, UserController.index);
 routes.post('/user', UserController.store);
+routes.get('/user/edit/:id', AuthMiddleware, UserController.edit);
+routes.delete('/user/:id', AuthMiddleware, UserController.delete);
 
 routes.get('/equipmentType', AuthMiddleware, EquipmentTypeController.index);
 routes.get(
