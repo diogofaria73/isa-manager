@@ -52,13 +52,13 @@ export default function User() {
                   <span className="fa fa-edit" />
                 </td>
                 <td>
-                  <Link
+                  <button
                     onClick={() => startDelete(user.id)}
                     type="button"
                     className="btn"
                   >
                     <span className="fa fa-trash" />
-                  </Link>
+                  </button>
                 </td>
               </tr>
             ))}

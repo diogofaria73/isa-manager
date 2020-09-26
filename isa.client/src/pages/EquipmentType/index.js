@@ -53,22 +53,22 @@ export default function EquipmentType() {
                   )}
                 </td>
                 <td>
-                  <Link
+                  <button
                     onClick={() => startEdit(equipmentType.id)}
                     type="button"
                     className="btn"
                   >
                     <span className="fa fa-edit" />
-                  </Link>
+                  </button>
                 </td>
                 <td>
-                  <Link
+                  <button
                     onClick={() => startDelete(equipmentType.id)}
                     type="button"
                     className="btn"
                   >
                     <span className="fa fa-trash" />
-                  </Link>
+                  </button>
                 </td>
               </tr>
             ))}

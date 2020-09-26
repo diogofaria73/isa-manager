@@ -49,22 +49,22 @@ function OperationalArea() {
                   })}
                 </td>
                 <td>
-                  <Link
+                  <button
                     onClick={() => startEdit(area.id)}
                     type="button"
                     className="btn"
                   >
                     <span className="fa fa-edit" />
-                  </Link>
+                  </button>
                 </td>
                 <td>
-                  <Link
+                  <button
                     onClick={() => startDelete(area.id)}
                     type="button"
                     className="btn"
                   >
                     <span className="fa fa-trash" />
-                  </Link>
+                  </button>
                 </td>
               </tr>
             ))}
