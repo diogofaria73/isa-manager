@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
+import { format, parseISO } from 'date-fns';
+import Title from '../../components/Title';
 import EquipmentFilter from '../../components/Equipment/Filter/EquipmentFilter';
 import api from '~/services/api';
+import history from '~/services/history';
 
 export default function Equipment() {
   const [equipments, setEquipment] = useState([]);
@@ -16,12 +19,20 @@ export default function Equipment() {
     loadEquipments();
   }, []);
 
+  const startEdit = (id) => {
+    history.push(`/equipment/edit/${id}`);
+  };
+
+  const startDelete = (id) => {
+    history.push(`/equipment/delete/${id}`);
+  };
+
   return (
     <div className="mt-4">
-      <h3>Lista de Equipamentos</h3>
+      <Title titulo="Lista de Equipamentos:" />
       <EquipmentFilter />
       <section className="h-100 align-baseline">
-        <table className="table table-sm table-striped table-hover">
+        <table className="table table-sm table-striped table-hover text-center">
           <thead>
             <tr>
               <th>Equipamento</th>
@@ -41,13 +52,29 @@ export default function Equipment() {
                 <td>{equipment.tag}</td>
                 <td>{equipment.type.title}</td>
                 <td>{equipment.area.title}</td>
-                <td>{equipment.active}</td>
-                <td>{equipment.createdAt}</td>
+                <td>{equipment.is_active ? 'Sim' : 'Não'}</td>
                 <td>
-                  <span className="fa fa-edit" />
+                  {format(parseISO(equipment.createdAt), 'dd/MM/YYY HH:mm', {
+                    timezone: 'America/Sao_Paulo',
+                  })}
                 </td>
                 <td>
-                  <span className="fa fa-trash" />
+                  <button
+                    onClick={() => startEdit(equipment.id)}
+                    type="button"
+                    className="btn"
+                  >
+                    <span className="fa fa-edit" />
+                  </button>
+                </td>
+                <td>
+                  <button
+                    onClick={() => startDelete(equipment.id)}
+                    type="button"
+                    className="btn"
+                  >
+                    <span className="fa fa-trash" />
+                  </button>
                 </td>
               </tr>
             ))}

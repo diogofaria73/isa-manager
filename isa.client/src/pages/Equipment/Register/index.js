@@ -24,6 +24,7 @@ export default function EquipmentRegister() {
   const dispatch = useDispatch();
   const [areas, setAreas] = useState([]);
   const [types, setTypes] = useState([]);
+  const [equipmentState, setEquipmentState] = useState([]);
 
   useEffect(() => {
     async function loadAreas() {
@@ -39,6 +40,11 @@ export default function EquipmentRegister() {
     }
     loadAreas();
     loadTypes();
+    const stateList = [
+      { id: '1', title: 'Ativo' },
+      { id: '0', title: 'Inativo' },
+    ];
+    setEquipmentState(stateList);
   }, []);
 
   function handleSubmit(data) {
@@ -48,7 +54,7 @@ export default function EquipmentRegister() {
   return (
     <>
       <Form schema={schema} onSubmit={handleSubmit} className="mt-5">
-        <h3>Novo Equipamento</h3>
+        <h3>Novo Equipamento:</h3>
         <div className="row-cols mt-3">
           <Input
             className="form-control"
@@ -74,10 +80,10 @@ export default function EquipmentRegister() {
             options={areas}
             placeholder="Área Operacional"
           />
-          <Input
+          <Select
             className="form-control mt-3"
             name="is_active"
-            type="text"
+            options={equipmentState}
             placeholder="Status do Equipamento"
           />
           <hr />

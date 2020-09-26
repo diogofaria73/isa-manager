@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { format, parseISO } from 'date-fns';
+import Title from '../../components/Title';
 import api from '~/services/api';
 
 export default function Consumption() {
@@ -15,9 +17,9 @@ export default function Consumption() {
 
   return (
     <div className="mt-4">
-      <h3>Lista de Equipamentos</h3>
+      <Title titulo="Histórico de Consumo:" />
       <section className="align-baseline mt-4">
-        <table className="table table-sm table-striped table-hover">
+        <table className="table table-sm table-striped table-hover text-center">
           <thead>
             <tr>
               <th>Tag CLP</th>
@@ -29,8 +31,12 @@ export default function Consumption() {
             {consumptions.map((consumption) => (
               <tr key={consumption.id}>
                 <td>{consumption.plcTag}</td>
-                <td>{consumption.consumptionValue}</td>
-                <td>{consumption.createdAt}</td>
+                <td>{consumption.consumptionValue.toLocaleString('pt-BR')}</td>
+                <td>
+                  {format(parseISO(consumption.createdAt), 'dd/MM/YYY HH:mm', {
+                    timezone: 'America/Sao_Paulo',
+                  })}
+                </td>
               </tr>
             ))}
           </tbody>

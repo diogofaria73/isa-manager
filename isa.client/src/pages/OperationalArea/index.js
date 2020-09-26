@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
+import { format, parseISO } from 'date-fns';
+import Title from '../../components/Title';
 import api from '~/services/api';
+import history from '~/services/history';
 
-export default function OperationalArea() {
+function OperationalArea() {
   const [areas, setAreas] = useState([]);
 
   useEffect(() => {
@@ -14,11 +18,19 @@ export default function OperationalArea() {
     loadAreas();
   }, []);
 
+  const startEdit = (id) => {
+    history.push(`/area/edit/${id}`);
+  };
+
+  const startDelete = (id) => {
+    history.push(`/area/delete/${id}`);
+  };
+
   return (
     <div className="mt-4">
-      <h3>Lista de Áreas Operacionais</h3>
+      <Title titulo="Lista de Áreas Operacionais:" />
       <section className="align-baseline mt-4">
-        <table className="table table-sm table-striped table-hover">
+        <table className="table table-sm table-striped table-hover text-center">
           <thead>
             <tr>
               <th>Área</th>
@@ -31,12 +43,28 @@ export default function OperationalArea() {
             {areas.map((area) => (
               <tr key={area.id}>
                 <td>{area.title}</td>
-                <td>{area.updatedAt}</td>
                 <td>
-                  <span className="fa fa-edit" />
+                  {format(parseISO(area.updatedAt), 'dd/MM/YYY HH:mm', {
+                    timezone: 'America/Sao_Paulo',
+                  })}
                 </td>
                 <td>
-                  <span className="fa fa-trash" />
+                  <button
+                    onClick={() => startEdit(area.id)}
+                    type="button"
+                    className="btn"
+                  >
+                    <span className="fa fa-edit" />
+                  </button>
+                </td>
+                <td>
+                  <button
+                    onClick={() => startDelete(area.id)}
+                    type="button"
+                    className="btn"
+                  >
+                    <span className="fa fa-trash" />
+                  </button>
                 </td>
               </tr>
             ))}
@@ -44,12 +72,18 @@ export default function OperationalArea() {
         </table>
         <div className="align-baseline d-flex justify-content-end">
           <div className="btn-group">
-            <button type="button" className="btn btn-secondary btn-sm">
+            <Link
+              to="/area/register"
+              type="button"
+              className="btn btn-secondary btn-sm"
+            >
               <BsFillPlusCircleFill size={16} color="#FFF" /> Adicionar
-            </button>
+            </Link>
           </div>
         </div>
       </section>
     </div>
   );
 }
+
+export default withRouter(OperationalArea);

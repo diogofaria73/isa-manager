@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { format, parseISO } from 'date-fns';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
+import Title from '../../components/Title';
 import api from '~/services/api';
+import history from '~/services/history';
 
 export default function User() {
   const [users, setUser] = useState([]);
@@ -14,11 +18,15 @@ export default function User() {
     loadUsers();
   }, []);
 
+  const startDelete = (id) => {
+    history.push(`/user/delete/${id}`);
+  };
+
   return (
     <div className="mt-4">
-      <h3>Lista de Usuários</h3>
+      <Title titulo="Lista de Usuários:" />
       <section className="align-baseline mt-4">
-        <table className="table table-sm table-striped table-hover">
+        <table className="table table-sm table-striped table-hover text-center">
           <thead>
             <tr>
               <th>Nome</th>
@@ -34,13 +42,23 @@ export default function User() {
               <tr key={user.id}>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>{user.is_admin}</td>
-                <td>{user.updatedAt}</td>
+                <td>{user.is_admin ? 'Sim' : 'Não'}</td>
+                <td>
+                  {format(parseISO(user.updatedAt), 'dd/MM/YYY HH:mm', {
+                    timezone: 'America/Sao_Paulo',
+                  })}
+                </td>
                 <td>
                   <span className="fa fa-edit" />
                 </td>
                 <td>
-                  <span className="fa fa-trash" />
+                  <button
+                    onClick={() => startDelete(user.id)}
+                    type="button"
+                    className="btn"
+                  >
+                    <span className="fa fa-trash" />
+                  </button>
                 </td>
               </tr>
             ))}
@@ -48,9 +66,13 @@ export default function User() {
         </table>
         <div className="align-baseline d-flex justify-content-end">
           <div className="btn-group">
-            <button type="button" className="btn btn-secondary btn-sm">
+            <Link
+              to="/user/register"
+              type="button"
+              className="btn btn-secondary btn-sm"
+            >
               <BsFillPlusCircleFill size={16} color="#FFF" /> Adicionar
-            </button>
+            </Link>
           </div>
         </div>
       </section>

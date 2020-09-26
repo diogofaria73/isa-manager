@@ -1,3 +1,17 @@
+export function createUserRequest(data) {
+  return {
+    type: '@user/CREATE_USER_REQUEST',
+    payload: { data },
+  };
+}
+
+export function createUserSuccess(data) {
+  return {
+    type: '@parameter/CREATE_USER_SUCCESS',
+    payload: { data },
+  };
+}
+
 export function updateProfileRequest(data) {
   return {
     type: '@user/UPDATE_PROFILE_REQUEST',
@@ -15,5 +29,18 @@ export function updateProfileSuccess(profile) {
 export function updateProfileFailure() {
   return {
     type: '@user/UPDATE_PROFILE_FAILURE',
+  };
+}
+
+export function userFailure() {
+  return {
+    type: '@user/REQUEST_FAILURE',
+  };
+}
+
+export function deleteUserRequest(id) {
+  return {
+    type: '@user/DELETE_USER_REQUEST',
+    payload: { id },
   };
 }

@@ -75,9 +75,8 @@ class EquipmentController {
       tag: Yup.string()
         .min(5)
         .required(),
-      plcTag: Yup.string()
-        .min(3)
-        .required(),
+      operational_area_id: Yup.number().required(),
+      equipment_type_id: Yup.number().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -102,19 +101,19 @@ class EquipmentController {
 
     await equipment.update(req.body);
 
-    const { id, name, tag, plcTag, area, type } = await Equipment.findByPk(
+    const { id, name, tag, area, type } = await Equipment.findByPk(
       req.params.id,
       {
         include: [
           {
             model: OperationalArea,
             as: 'area',
-            attributes: ['id', 'name'],
+            attributes: ['id', 'title'],
           },
           {
             model: EquipmentType,
             as: 'type',
-            attributes: ['id', 'name'],
+            attributes: ['id', 'title'],
           },
         ],
       }
@@ -124,9 +123,20 @@ class EquipmentController {
       id,
       name,
       tag,
-      plcTag,
       area,
       type,
+    });
+  }
+
+  async edit(req, res) {
+    const equipment = await Equipment.findByPk(req.params.id);
+
+    if (!equipment) {
+      return res.status(400).json({ error: 'Equipamento não encontrado.' });
+    }
+
+    return res.json({
+      equipment,
     });
   }
 
@@ -146,6 +156,49 @@ class EquipmentController {
         .status(400)
         .json({ message: 'Não foi possivel deletar o equipamento' });
     }
+  }
+
+  // Método para seleção de equipamento de acordo com área ou tipo de equipamento.
+  async findByAreaAndType(req, res) {
+    let equipmentList = [];
+    const schema = Yup.object().shape({
+      operational_area_id: Yup.number().required(),
+      equipment_type_id: Yup.number().required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Dados de busca inválidos.' });
+    }
+
+    const area_id = req.body.operational_area_id;
+    const type_id = req.body.equipment_type_id;
+
+    if (area_id === '0' && type_id === '0') {
+      equipmentList = await Equipment.findAll();
+    } else if (area_id !== '0' && type_id === '0') {
+      equipmentList = await Equipment.findAll({
+        where: {
+          operational_area_id: area_id,
+        },
+      });
+    } else if (area_id === '0' && type_id !== '0') {
+      equipmentList = await Equipment.findAll({
+        where: {
+          equipment_type_id: type_id,
+        },
+      });
+    } else {
+      equipmentList = await Equipment.findAll({
+        where: {
+          operational_area_id: area_id,
+          equipment_type_id: type_id,
+        },
+      });
+    }
+
+    return res.json({
+      equipmentList,
+    });
   }
 }
 

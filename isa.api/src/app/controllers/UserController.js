@@ -91,6 +91,34 @@ class UserController {
       name,
     });
   }
+
+  async edit(req, res) {
+    const user = await User.findByPk(req.params.id);
+
+    if (!user) {
+      return res.status(400).json({ error: 'Usuário não encontrado.' });
+    }
+
+    return res.json({
+      user,
+    });
+  }
+
+  async delete(req, res) {
+    try {
+      await User.destroy({
+        where: {
+          id: req.params.id,
+        },
+      });
+
+      return res.status(200).json({ message: 'Usuário deletado com sucesso' });
+    } catch (error) {
+      return res
+        .status(400)
+        .json({ message: 'Não foi possivel deletar o usuário' });
+    }
+  }
 }
 
 export default new UserController();

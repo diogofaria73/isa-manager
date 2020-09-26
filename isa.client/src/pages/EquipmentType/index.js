@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
+import { format, parseISO } from 'date-fns';
+import Title from '../../components/Title';
 import api from '../../services/api';
+import history from '~/services/history';
 
 export default function EquipmentType() {
   const [equipmentTypes, setEquipmentTypes] = useState([]);
@@ -14,11 +18,19 @@ export default function EquipmentType() {
     loadEquipmentTypes();
   }, []);
 
+  const startEdit = (id) => {
+    history.push(`/type/edit/${id}`);
+  };
+
+  const startDelete = (id) => {
+    history.push(`/type/delete/${id}`);
+  };
+
   return (
     <div className="mt-4">
-      <h3>Lista de Tipos de Equipamentos</h3>
+      <Title titulo="Lista de Tipos de Equipamentos:" />
       <section className="align-baseline mt-4">
-        <table className="table table-sm table-striped table-hover">
+        <table className="table table-sm table-striped table-hover text-center">
           <thead>
             <tr>
               <th>Nome</th>
@@ -31,12 +43,32 @@ export default function EquipmentType() {
             {equipmentTypes.map((equipmentType) => (
               <tr key={equipmentType.id}>
                 <td>{equipmentType.title}</td>
-                <td>{equipmentType.updatedAt}</td>
                 <td>
-                  <span className="fa fa-edit" />
+                  {format(
+                    parseISO(equipmentType.updatedAt),
+                    'dd/MM/YYY HH:mm',
+                    {
+                      timezone: 'America/Sao_Paulo',
+                    }
+                  )}
                 </td>
                 <td>
-                  <span className="fa fa-trash" />
+                  <button
+                    onClick={() => startEdit(equipmentType.id)}
+                    type="button"
+                    className="btn"
+                  >
+                    <span className="fa fa-edit" />
+                  </button>
+                </td>
+                <td>
+                  <button
+                    onClick={() => startDelete(equipmentType.id)}
+                    type="button"
+                    className="btn"
+                  >
+                    <span className="fa fa-trash" />
+                  </button>
                 </td>
               </tr>
             ))}
@@ -44,9 +76,13 @@ export default function EquipmentType() {
         </table>
         <div className="align-baseline d-flex justify-content-end">
           <div className="btn-group">
-            <button type="button" className="btn btn-secondary btn-sm">
+            <Link
+              to="/type/register"
+              type="button"
+              className="btn btn-secondary btn-sm"
+            >
               <BsFillPlusCircleFill size={16} color="#FFF" /> Adicionar
-            </button>
+            </Link>
           </div>
         </div>
       </section>

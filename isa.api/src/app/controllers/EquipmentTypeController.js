@@ -3,7 +3,9 @@ import EquipmentType from '../models/EquipmentType';
 
 class EquipmentTypeController {
   async index(req, res) {
-    const types = await EquipmentType.findAll();
+    const types = await EquipmentType.findAll({
+      order: [['title', 'asc']],
+    });
 
     if (!types)
       return res
@@ -91,6 +93,20 @@ class EquipmentTypeController {
           'Não foi possível deleter o tipo de equipamento, existem equipamentos vinculados a este registro',
       });
     }
+  }
+
+  async edit(req, res) {
+    const equipmentType = await EquipmentType.findByPk(req.params.id);
+
+    if (!equipmentType) {
+      return res
+        .status(400)
+        .json({ error: 'Tipo de equipamento não encontrado.' });
+    }
+
+    return res.json({
+      equipmentType,
+    });
   }
 }
 

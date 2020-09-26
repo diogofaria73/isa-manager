@@ -4,7 +4,9 @@ import Parameter from '../models/Parameter';
 class ParameterController {
   // Listagem de todos os parâmetros na tela inicial.
   async index(req, res) {
-    const parameterList = await Parameter.findAll();
+    const parameterList = await Parameter.findAll({
+      order: [['name', 'asc']],
+    });
 
     if (!parameterList)
       return res
@@ -18,9 +20,7 @@ class ParameterController {
 
   async store(req, res) {
     const schema = Yup.object().shape({
-      name: Yup.string()
-        .required()
-        .min(5),
+      name: Yup.string().required(),
       price: Yup.number().required(),
     });
 
@@ -90,6 +90,20 @@ class ParameterController {
         .status(400)
         .json({ message: 'Não foi possivel deletar o parâmetro' });
     }
+  }
+
+  async edit(req, res) {
+    const parameter = await Parameter.findByPk(req.params.id);
+
+    if (!parameter) {
+      return res
+        .status(400)
+        .json({ error: 'Área operacional não encontrada.' });
+    }
+
+    return res.json({
+      parameter,
+    });
   }
 }
 
