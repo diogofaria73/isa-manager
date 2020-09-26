@@ -15,7 +15,7 @@ export default function EquipmentDelete(props) {
   const [equipment, setEquipment] = useState([]);
   const [areas, setAreas] = useState([]);
   const [types, setTypes] = useState([]);
-  const [equipmentState, setEquipmentState] = useState([])
+  const [equipmentState, setEquipmentState] = useState([]);
 
   useEffect(() => {
     async function loadEquipment() {
@@ -43,7 +43,7 @@ export default function EquipmentDelete(props) {
       { id: '0', title: 'Inativo' },
     ];
     setEquipmentState(stateList);
-  }, []);
+  }, [props.match.params]);
 
   function handleSubmit(data) {
     dispatch(deleteEquipmentRequest(data.id));

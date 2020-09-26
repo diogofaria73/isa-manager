@@ -21,7 +21,7 @@ export default function OperationalAreaDelete(props) {
       setArea(data);
     }
     loadArea();
-  }, []);
+  }, [props.match.params]);
 
   const dispatch = useDispatch();
 

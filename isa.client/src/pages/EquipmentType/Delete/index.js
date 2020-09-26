@@ -21,7 +21,7 @@ export default function OperationalAreaDelete(props) {
       setEquipmentType(data);
     }
     loadEquipmentType();
-  }, []);
+  }, [props.match.params]);
 
   const dispatch = useDispatch();
 

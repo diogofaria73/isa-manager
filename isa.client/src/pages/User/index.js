@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
+import Title from '../../components/Title';
 import api from '~/services/api';
+import history from '~/services/history';
 
 export default function User() {
   const [users, setUser] = useState([]);
@@ -16,11 +18,15 @@ export default function User() {
     loadUsers();
   }, []);
 
+  const startDelete = (id) => {
+    history.push(`/user/delete/${id}`);
+  };
+
   return (
     <div className="mt-4">
-      <h3>Lista de Usuários</h3>
+      <Title titulo="Lista de Usuários:" />
       <section className="align-baseline mt-4">
-        <table className="table table-sm table-striped table-hover">
+        <table className="table table-sm table-striped table-hover text-center">
           <thead>
             <tr>
               <th>Nome</th>
@@ -46,7 +52,13 @@ export default function User() {
                   <span className="fa fa-edit" />
                 </td>
                 <td>
-                  <span className="fa fa-trash" />
+                  <button
+                    onClick={() => startDelete(user.id)}
+                    type="button"
+                    className="btn"
+                  >
+                    <span className="fa fa-trash" />
+                  </button>
                 </td>
               </tr>
             ))}

@@ -54,7 +54,7 @@ export default function EquipmentEdit(props) {
       { id: '0', title: 'Inativo' },
     ];
     setEquipmentState(stateList);
-  }, []);
+  }, [props.match.params]);
 
   function handleSubmit(data) {
     dispatch(updateEquipmentRequest(data));

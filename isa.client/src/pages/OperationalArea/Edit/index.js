@@ -22,7 +22,7 @@ export default function OperationalAreaEdit(props) {
       setArea(data);
     }
     loadArea();
-  }, []);
+  }, [props.match.params]);
 
   const dispatch = useDispatch();
 

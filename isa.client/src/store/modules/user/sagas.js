@@ -48,5 +48,22 @@ export function* updateProfile({ payload }) {
   }
 }
 
+export function* deleteUser({ payload }) {
+  try {
+    const response = yield call(api.delete, `user/${payload.id}`);
+
+    toast.success(`Usuário excluído com sucesso`);
+
+    yield put(updateProfileSuccess(response.data));
+
+    history.push('/user');
+  } catch (error) {
+    toast.error(`Tivemos um problema para excluir o usuário`);
+    yield put(userFailure());
+  }
+}
 // export default all([takeLatest('@user/UPDATE_PROFILE_REQUEST', updateProfile)]);
-export default all([takeLatest('@user/CREATE_USER_REQUEST', createUser)]);
+export default all([
+  takeLatest('@user/CREATE_USER_REQUEST', createUser),
+  takeLatest('@user/DELETE_USER_REQUEST', deleteUser),
+]);

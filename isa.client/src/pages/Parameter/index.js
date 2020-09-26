@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
+import { format, parseISO } from 'date-fns';
+import Title from '../../components/Title';
 import api from '../../services/api';
 import history from '~/services/history';
 
@@ -26,9 +28,9 @@ export default function Parameter() {
 
   return (
     <div className="mt-4">
-      <h3>Lista de Parâmetros</h3>
+      <Title titulo="Lista de Parâmetros:" />
       <section className="align-baseline mt-4">
-        <table className="table table-sm table-striped table-hover">
+        <table className="table table-sm table-striped table-hover text-center">
           <thead>
             <tr>
               <th>Parâmetro</th>
@@ -42,25 +44,29 @@ export default function Parameter() {
             {parameters.map((parameter) => (
               <tr key={parameter.id}>
                 <td>{parameter.name}</td>
-                <td>{parameter.price}</td>
-                <td>{parameter.updatedAt}</td>
+                <td>{parameter.price.toLocaleString('pt-BR')}</td>
                 <td>
-                  <Link
+                  {format(parseISO(parameter.updatedAt), 'dd/MM/YYY HH:mm', {
+                    timezone: 'America/Sao_Paulo',
+                  })}
+                </td>
+                <td>
+                  <button
                     onClick={() => startEdit(parameter.id)}
                     type="button"
                     className="btn"
                   >
                     <span className="fa fa-edit" />
-                  </Link>
+                  </button>
                 </td>
                 <td>
-                  <Link
+                  <button
                     onClick={() => startDelete(parameter.id)}
                     type="button"
                     className="btn"
                   >
                     <span className="fa fa-trash" />
-                  </Link>
+                  </button>
                 </td>
               </tr>
             ))}

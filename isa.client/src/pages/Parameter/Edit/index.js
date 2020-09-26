@@ -23,7 +23,7 @@ export default function ParameterEdit(props) {
       setParameter(data);
     }
     loadArea();
-  }, []);
+  }, [props.match.params]);
 
   const dispatch = useDispatch();
 

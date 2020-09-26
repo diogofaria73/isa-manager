@@ -37,3 +37,10 @@ export function userFailure() {
     type: '@user/REQUEST_FAILURE',
   };
 }
+
+export function deleteUserRequest(id) {
+  return {
+    type: '@user/DELETE_USER_REQUEST',
+    payload: { id },
+  };
+}

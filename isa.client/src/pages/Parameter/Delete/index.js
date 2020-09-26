@@ -21,7 +21,7 @@ export default function ParameterDelete(props) {
       setParameter(data);
     }
     loadParameter();
-  }, []);
+  }, [props.match.params]);
 
   const dispatch = useDispatch();
 

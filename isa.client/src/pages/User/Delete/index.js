@@ -3,31 +3,30 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Input, Form } from '@rocketseat/unform';
-import { updateEquipmentTypeRequest } from '~/store/modules/equipmentType/actions';
+import { deleteUserRequest } from '~/store/modules/user/actions';
 import api from '~/services/api';
 
 const schema = Yup.object().shape({
   id: Yup.number(),
-  title: Yup.string().required('O campo Nome é obrigatório.'),
 });
 
-export default function EquipmentTypeEdit(props) {
-  const [equipmentType, setEquipmentType] = useState([]);
+export default function UserDelete(props) {
+  const [user, setUser] = useState([]);
 
   useEffect(() => {
-    async function loadEquipmentType() {
+    async function loadUser() {
       const { id } = props.match.params;
-      const response = await api.get(`/equipmentType/edit/${id}`);
-      const data = response.data.equipmentType;
-      setEquipmentType(data);
+      const response = await api.get(`/user/edit/${id}`);
+      const data = response.data.user;
+      setUser(data);
     }
-    loadEquipmentType();
+    loadUser();
   }, [props.match.params]);
 
   const dispatch = useDispatch();
 
   function handleSubmit(data) {
-    dispatch(updateEquipmentTypeRequest(data));
+    dispatch(deleteUserRequest(data.id));
   }
 
   return (
@@ -35,28 +34,38 @@ export default function EquipmentTypeEdit(props) {
       <Form
         schema={schema}
         onSubmit={handleSubmit}
-        initialData={equipmentType}
+        initialData={user}
         className="mt-5"
       >
-        <h3>Editar Tipo de Equipamento</h3>
+        <h3>Excluir Usuário</h3>
         <div className="row-cols mt-3">
           <Input className="form-control" name="id" type="hidden" />
+          <p>Nome:</p>
           <Input
             className="form-control"
-            name="title"
+            name="name"
             type="text"
-            placeholder="Nome do Tipo de Equipamento"
+            placeholder="Nome do Parâmetro"
+            disabled
+          />
+          <p>Email:</p>
+          <Input
+            className="form-control"
+            name="email"
+            type="text"
+            placeholder="Valor do Parâmetro"
+            disabled
           />
           <hr />
           <section className="row d-flex justify-content-end">
             <div className="col-1">
-              <Link to="/type" type="submit" className="btn btn-secondary">
+              <Link to="/user" type="submit" className="btn btn-secondary">
                 Voltar
               </Link>
             </div>
             <div className="col-1">
-              <button type="submit" className="btn btn-secondary">
-                Salvar
+              <button type="submit" className="btn btn-danger">
+                Excluir
               </button>
             </div>
           </section>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { format, parseISO } from 'date-fns';
+import Title from '../../components/Title';
 import EquipmentFilter from '../../components/Equipment/Filter/EquipmentFilter';
 import api from '~/services/api';
 import history from '~/services/history';
@@ -28,10 +29,10 @@ export default function Equipment() {
 
   return (
     <div className="mt-4">
-      <h3>Lista de Equipamentos</h3>
+      <Title titulo="Lista de Equipamentos:" />
       <EquipmentFilter />
       <section className="h-100 align-baseline">
-        <table className="table table-sm table-striped table-hover">
+        <table className="table table-sm table-striped table-hover text-center">
           <thead>
             <tr>
               <th>Equipamento</th>
@@ -58,22 +59,22 @@ export default function Equipment() {
                   })}
                 </td>
                 <td>
-                  <Link
+                  <button
                     onClick={() => startEdit(equipment.id)}
                     type="button"
                     className="btn"
                   >
                     <span className="fa fa-edit" />
-                  </Link>
+                  </button>
                 </td>
                 <td>
-                  <Link
+                  <button
                     onClick={() => startDelete(equipment.id)}
                     type="button"
                     className="btn"
                   >
                     <span className="fa fa-trash" />
-                  </Link>
+                  </button>
                 </td>
               </tr>
             ))}
