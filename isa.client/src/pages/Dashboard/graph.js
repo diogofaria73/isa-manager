@@ -41,7 +41,7 @@ export default function Graph() {
 
   return (
     <>
-      <div className="row mt-4">
+      <div className="row mt-5">
         <div className="col">
           <h6 className="text-center">Potência e Custo Por Equipamento</h6>
           <div style={{ display: 'flex', maxWidth: 900 }}>

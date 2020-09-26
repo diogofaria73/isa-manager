@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
-import { Form, Input } from '@rocketseat/unform';
+import { Form } from '@rocketseat/unform';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import ptBR from 'date-fns/locale/pt-BR';
+import 'react-datepicker/dist/react-datepicker.css';
 import api from '../../services/api';
+
+registerLocale('pt-BR', ptBR);
 
 export default function DashboardFilter() {
   const [equipments, setEquipments] = useState([]);
   const [areas, setAreas] = useState([]);
   const [types, setTypes] = useState([]);
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
   const [selStatus, setSelStatus] = useState([]);
 
   useEffect(() => {
@@ -72,51 +79,58 @@ export default function DashboardFilter() {
     <Form className="mt-5">
       <div className="row">
         <div className="col">
-          <label>Áreas Operacionais: </label>
+          <h6>Áreas Operacionais: </h6>
           <select className="form-control" onChange={changeOperacionalArea}>
             <option value="0">Todos</option>
             {areas.map((area) => (
-              <option value={area.id}>{area.title}</option>
+              <option key={area.id} value={area.id}>
+                {area.title}
+              </option>
             ))}
           </select>
         </div>
         <div className="col">
-          <label>Tipos de Equipamentos: </label>
+          <h6>Tipos de Equipamentos: </h6>
           <select className="form-control" onChange={changeEquipmentType}>
             <option value="0">Todos</option>
             {types.map((type) => (
-              <option value={type.id}>{type.title}</option>
+              <option key={type.id} value={type.id}>
+                {type.title}
+              </option>
             ))}
           </select>
         </div>
         <div className="col">
-          <label>Equipamentos: </label>
+          <h6>Equipamentos: </h6>
           <select className="form-control">
             <option value="0">Todos</option>
             {equipments.map((equipment) => (
-              <option value={equipment.id}>{equipment.tag}</option>
+              <option key={equipment.id} value={equipment.id}>
+                {equipment.tag}
+              </option>
             ))}
           </select>
         </div>
-
       </div>
       <div className="row mt-3 align-items-center">
         <div className="col">
-          <label>Data Inicial:</label>
-          <Input
+          <h6>Data Inicial:</h6>
+          <DatePicker
             className="form-control"
-            name="start_date"
-            type="text"
-            placeholder="Data Inicial"
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            locale="pt-BR"
+            dateFormat="dd/MM/yyyy"
           />
         </div>
         <div className="col">
-          <label>Data Final:</label>
-          <Input
+          <h6>Data Final:</h6>
+          <DatePicker
             className="form-control"
-            name="end_date"
-            type="text"
-            placeholder="Data Inicial"
+            selected={endDate}
+            onChange={(date) => setEndDate(date)}
+            locale="pt-BR"
+            dateFormat="dd/MM/yyyy"
           />
         </div>
         <div className="col">
