@@ -77,67 +77,71 @@ export default function DashboardFilter() {
 
   return (
     <Form className="mt-5">
-      <div className="row">
-        <div className="col">
-          <h6>Áreas Operacionais: </h6>
-          <select className="form-control" onChange={changeOperacionalArea}>
-            <option value="0">Todos</option>
-            {areas.map((area) => (
-              <option key={area.id} value={area.id}>
-                {area.title}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="col">
-          <h6>Tipos de Equipamentos: </h6>
-          <select className="form-control" onChange={changeEquipmentType}>
-            <option value="0">Todos</option>
-            {types.map((type) => (
-              <option key={type.id} value={type.id}>
-                {type.title}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="col">
-          <h6>Equipamentos: </h6>
-          <select className="form-control">
-            <option value="0">Todos</option>
-            {equipments.map((equipment) => (
-              <option key={equipment.id} value={equipment.id}>
-                {equipment.tag}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-      <div className="row mt-3 align-items-center">
-        <div className="col">
-          <h6>Data Inicial:</h6>
-          <DatePicker
-            className="form-control"
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            locale="pt-BR"
-            dateFormat="dd/MM/yyyy"
-          />
-        </div>
-        <div className="col">
-          <h6>Data Final:</h6>
-          <DatePicker
-            className="form-control"
-            selected={endDate}
-            onChange={(date) => setEndDate(date)}
-            locale="pt-BR"
-            dateFormat="dd/MM/yyyy"
-          />
-        </div>
-        <div className="col">
-          <div className="btn-group">
-            <button type="button" className="btn btn-secondary btn-sm">
-              <BsSearch size={12} color="#FFF" /> Buscar
-            </button>
+      <div className="card">
+        <div className="card-body">
+          <div className="row">
+            <div className="col">
+              <h6>Áreas Operacionais: </h6>
+              <select className="form-control" onChange={changeOperacionalArea}>
+                <option value="0">Todos</option>
+                {areas.map((area) => (
+                  <option key={area.id} value={area.id}>
+                    {area.title}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="col">
+              <h6>Tipos de Equipamentos: </h6>
+              <select className="form-control" onChange={changeEquipmentType}>
+                <option value="0">Todos</option>
+                {types.map((type) => (
+                  <option key={type.id} value={type.id}>
+                    {type.title}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="col">
+              <h6>Equipamentos: </h6>
+              <select className="form-control">
+                <option value="0">Todos</option>
+                {equipments.map((equipment) => (
+                  <option key={equipment.id} value={equipment.id}>
+                    {equipment.tag}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className="row mt-3 align-items-center">
+            <div className="col">
+              <h6>Data Inicial:</h6>
+              <DatePicker
+                className="form-control"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                locale="pt-BR"
+                dateFormat="dd/MM/yyyy"
+              />
+            </div>
+            <div className="col">
+              <h6>Data Final:</h6>
+              <DatePicker
+                className="form-control"
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+                locale="pt-BR"
+                dateFormat="dd/MM/yyyy"
+              />
+            </div>
+            <div className="col">
+              <div className="btn-group">
+                <button type="button" className="btn btn-secondary btn-sm">
+                  <BsSearch size={12} color="#FFF" /> Buscar
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
