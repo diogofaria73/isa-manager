@@ -11,9 +11,9 @@ import EquipmentTypeRegister from '../pages/EquipmentType/Register';
 import EquipmentTypeEdit from '../pages/EquipmentType/Edit';
 import EquipmentTypeDelete from '../pages/EquipmentType/Delete';
 import OperationalArea from '../pages/OperationalArea';
-import OperationalAreaRegister from '../pages/OperationalArea/Register';
-import OperationalAreaEdit from '../pages/OperationalArea/Edit';
-import OperationalAreaDelete from '../pages/OperationalArea/Delete';
+// import OperationalAreaRegister from '../pages/OperationalArea/Register';
+// import OperationalAreaEdit from '../pages/OperationalArea/Edit';
+// import OperationalAreaDelete from '../pages/OperationalArea/Delete';
 import SignIn from '../pages/SignIn';
 import Parameter from '../pages/Parameter';
 import ParameterRegister from '../pages/Parameter/Register';
@@ -68,24 +68,6 @@ export default function Routes() {
         isPrivate
       />
       <Route path="/area" exact component={OperationalArea} isPrivate />
-      <Route
-        path="/area/register"
-        exact
-        component={OperationalAreaRegister}
-        isPrivate
-      />
-      <Route
-        path="/area/edit/:id"
-        exact
-        component={OperationalAreaEdit}
-        isPrivate
-      />
-      <Route
-        path="/area/delete/:id"
-        exact
-        component={OperationalAreaDelete}
-        isPrivate
-      />
       <Route path="/parameter" exact component={Parameter} isPrivate />
       <Route
         path="/parameter/register"

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link, withRouter } from 'react-router-dom';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { format, parseISO } from 'date-fns';
-import Title from '../../components/Title';
 import api from '~/services/api';
-import history from '~/services/history';
+import EditModal from './EditModal';
+import DeleteModal from './DeleteModal';
+import RegisterModal from './RegisterModal';
 
-function OperationalArea() {
+export default function OperationalArea() {
   const [areas, setAreas] = useState([]);
 
   useEffect(() => {
@@ -18,17 +18,20 @@ function OperationalArea() {
     loadAreas();
   }, []);
 
-  const startEdit = (id) => {
-    history.push(`/area/edit/${id}`);
+  const handleEditModal = () => {
+    return <EditModal />;
   };
 
-  const startDelete = (id) => {
-    history.push(`/area/delete/${id}`);
+  const handleDeleteModal = () => {
+    return <DeleteModal />;
+  };
+
+  const handleCreateModal = () => {
+    return <RegisterModal />;
   };
 
   return (
     <div className="mt-4">
-      <Title titulo="Lista de Áreas Operacionais:" />
       <section className="align-baseline mt-4">
         <table className="table table-sm table-striped table-hover text-center">
           <thead>
@@ -50,40 +53,34 @@ function OperationalArea() {
                 </td>
                 <td>
                   <button
-                    onClick={() => startEdit(area.id)}
+                    onClick={() => handleEditModal()}
                     type="button"
                     className="btn"
                   >
                     <span className="fa fa-edit" />
                   </button>
                 </td>
-                <td>
-                  <button
-                    onClick={() => startDelete(area.id)}
+                <button
+                    onClick={() => handleDeleteModal()}
                     type="button"
                     className="btn"
                   >
-                    <span className="fa fa-trash" />
+                    <span className="fa fa-delete" />
                   </button>
-                </td>
               </tr>
             ))}
           </tbody>
         </table>
         <div className="align-baseline d-flex justify-content-end">
-          <div className="btn-group">
-            <Link
-              to="/area/register"
-              type="button"
-              className="btn btn-secondary btn-sm"
-            >
-              <BsFillPlusCircleFill size={16} color="#FFF" /> Adicionar
-            </Link>
-          </div>
+          <button
+            className="btn btn-primary"
+            onClick={() => handleCreateModal()}
+            type="button"
+          >
+            <BsFillPlusCircleFill size={16} color="#FFF" /> Adicionar
+          </button>
         </div>
       </section>
     </div>
   );
 }
-
-export default withRouter(OperationalArea);
