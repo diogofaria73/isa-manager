@@ -31,7 +31,7 @@ export default function Equipment() {
       <h3>Lista de Equipamentos</h3>
       <EquipmentFilter />
       <section className="h-100 align-baseline">
-        <table className="table table-sm table-striped table-hover">
+        <table className="table table-sm table-striped table-hover text-center">
           <thead>
             <tr>
               <th>Equipamento</th>

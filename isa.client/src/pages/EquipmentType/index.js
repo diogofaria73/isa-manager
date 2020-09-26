@@ -29,7 +29,7 @@ export default function EquipmentType() {
     <div className="mt-4">
       <h3>Lista de Tipos de Equipamentos</h3>
       <section className="align-baseline mt-4">
-        <table className="table table-sm table-striped table-hover">
+        <table className="table table-sm table-striped table-hover text-center">
           <thead>
             <tr>
               <th>Nome</th>

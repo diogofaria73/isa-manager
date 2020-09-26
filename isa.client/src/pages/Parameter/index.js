@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
+import { format, parseISO } from 'date-fns';
 import api from '../../services/api';
 import history from '~/services/history';
 
@@ -28,7 +29,7 @@ export default function Parameter() {
     <div className="mt-4">
       <h3>Lista de Parâmetros</h3>
       <section className="align-baseline mt-4">
-        <table className="table table-sm table-striped table-hover">
+        <table className="table table-sm table-striped table-hover text-center">
           <thead>
             <tr>
               <th>Parâmetro</th>
@@ -42,8 +43,12 @@ export default function Parameter() {
             {parameters.map((parameter) => (
               <tr key={parameter.id}>
                 <td>{parameter.name}</td>
-                <td>{parameter.price}</td>
-                <td>{parameter.updatedAt}</td>
+                <td>{parameter.price.toLocaleString('pt-BR')}</td>
+                <td>
+                  {format(parseISO(parameter.updatedAt), 'dd/MM/YYY HH:mm', {
+                    timezone: 'America/Sao_Paulo',
+                  })}
+                </td>
                 <td>
                   <Link
                     onClick={() => startEdit(parameter.id)}

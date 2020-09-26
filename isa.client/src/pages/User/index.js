@@ -20,7 +20,7 @@ export default function User() {
     <div className="mt-4">
       <h3>Lista de Usuários</h3>
       <section className="align-baseline mt-4">
-        <table className="table table-sm table-striped table-hover">
+        <table className="table table-sm table-striped table-hover text-center">
           <thead>
             <tr>
               <th>Nome</th>
