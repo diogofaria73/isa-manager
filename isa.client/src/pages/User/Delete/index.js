@@ -21,7 +21,7 @@ export default function UserDelete(props) {
       setUser(data);
     }
     loadUser();
-  }, []);
+  }, [props.match.params]);
 
   const dispatch = useDispatch();
 

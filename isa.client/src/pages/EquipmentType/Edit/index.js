@@ -22,7 +22,7 @@ export default function EquipmentTypeEdit(props) {
       setEquipmentType(data);
     }
     loadEquipmentType();
-  }, []);
+  }, [props.match.params]);
 
   const dispatch = useDispatch();
 
