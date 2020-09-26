@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { format, parseISO } from 'date-fns';
+import Title from '../../components/Title';
 import api from '~/services/api';
 
 export default function Consumption() {
@@ -16,7 +17,7 @@ export default function Consumption() {
 
   return (
     <div className="mt-4">
-      <h3>Lista de Equipamentos</h3>
+      <Title titulo="Histórico de Consumo:" />
       <section className="align-baseline mt-4">
         <table className="table table-sm table-striped table-hover text-center">
           <thead>

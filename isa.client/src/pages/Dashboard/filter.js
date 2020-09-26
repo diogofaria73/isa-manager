@@ -76,7 +76,7 @@ export default function DashboardFilter() {
   // }
 
   return (
-    <Form className="mt-5">
+    <Form className="mt-4">
       <div className="card">
         <div className="card-body">
           <div className="row">

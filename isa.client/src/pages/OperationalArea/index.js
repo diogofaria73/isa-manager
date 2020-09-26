@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { format, parseISO } from 'date-fns';
+import Title from '../../components/Title';
 import api from '~/services/api';
 import history from '~/services/history';
 
@@ -27,7 +28,7 @@ function OperationalArea() {
 
   return (
     <div className="mt-4">
-      <h3>Lista de Áreas Operacionais</h3>
+      <Title titulo="Lista de Áreas Operacionais:" />
       <section className="align-baseline mt-4">
         <table className="table table-sm table-striped table-hover text-center">
           <thead>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
+import Title from '../../components/Title';
 import api from '~/services/api';
 import history from '~/services/history';
 
@@ -23,7 +24,7 @@ export default function User() {
 
   return (
     <div className="mt-4">
-      <h3>Lista de Usuários</h3>
+      <Title titulo="Lista de Usuários:" />
       <section className="align-baseline mt-4">
         <table className="table table-sm table-striped table-hover text-center">
           <thead>
