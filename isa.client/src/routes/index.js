@@ -67,7 +67,7 @@ export default function Routes() {
         component={EquipmentTypeDelete}
         isPrivate
       />
-      <Route path="/area" exact component={OperationalArea} isPrivate />
+      <Route path="/area" isPrivate exact component={OperationalArea} />
       <Route
         path="/area/register"
         exact
