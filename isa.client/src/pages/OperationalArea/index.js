@@ -12,14 +12,12 @@ function OperationalArea() {
   const [areasPaged, setAreasPaged] = useState([]);
   const [currentPage, setCurrentPage] = useState();
   const [totalItens, setTotalItens] = useState();
+  const [itemsPerPage] = useState(10);
 
-  const getPage = (page, itemsPerPage, list) => {
+  const getPage = (page, list) => {
     const pagedList = [];
     if (page === undefined) {
       page = 1;
-    }
-    if (itemsPerPage === undefined) {
-      itemsPerPage = 5;
     }
     const startIndex = (page - 1) * itemsPerPage;
     let endIndex = startIndex + itemsPerPage - 1;
@@ -41,7 +39,7 @@ function OperationalArea() {
       setAreas(response);
       if (currentPage === undefined) {
         setCurrentPage(1);
-        getPage(currentPage, 5, response);
+        getPage(currentPage, response);
       }
     }
     loadAreas();
@@ -57,8 +55,8 @@ function OperationalArea() {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    console.log(`${currentPage} atual`);
-    getPage(page, 5, areas);
+    // console.log(`${currentPage} atual`);
+    getPage(page, areas);
   };
 
   return (
@@ -110,7 +108,7 @@ function OperationalArea() {
             <section className="align-baseline d-flex justify-content-start">
               <Pagination
                 activePage={currentPage}
-                itemsCountPerPage={5}
+                itemsCountPerPage={itemsPerPage}
                 totalItemsCount={totalItens || 1}
                 pageRangeDisplayed={2}
                 itemClass="page-item"
