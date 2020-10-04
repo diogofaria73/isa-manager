@@ -9,8 +9,29 @@ import history from '~/services/history';
 
 function OperationalArea() {
   const [areas, setAreas] = useState([]);
+  const [areasPaged, setAreasPaged] = useState([]);
   const [currentPage, setCurrentPage] = useState();
   const [totalItens, setTotalItens] = useState();
+
+  const getPage = (page, itemsPerPage, list) => {
+    const pagedList = [];
+    if (page === undefined) {
+      page = 1;
+    }
+    if (itemsPerPage === undefined) {
+      itemsPerPage = 5;
+    }
+    const startIndex = (page - 1) * itemsPerPage;
+    let endIndex = startIndex + itemsPerPage - 1;
+    if (endIndex >= list.length) {
+      endIndex = list.length - 1;
+    }
+
+    for (let i = startIndex; i <= endIndex; i += 1) {
+      pagedList.push(list[i]);
+    }
+    setAreasPaged(pagedList);
+  };
 
   useEffect(() => {
     async function loadAreas() {
@@ -18,6 +39,10 @@ function OperationalArea() {
 
       setTotalItens(response.length);
       setAreas(response);
+      if (currentPage === undefined) {
+        setCurrentPage(1);
+        getPage(currentPage, 5, response);
+      }
     }
     loadAreas();
   }, [totalItens, currentPage]);
@@ -32,7 +57,8 @@ function OperationalArea() {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    console.log(`${currentPage} was active`);
+    console.log(`${currentPage} atual`);
+    getPage(page, 5, areas);
   };
 
   return (
@@ -49,7 +75,7 @@ function OperationalArea() {
             </tr>
           </thead>
           <tbody>
-            {areas.map((area) => (
+            {areasPaged.map((area) => (
               <tr key={area.id}>
                 <td>{area.title}</td>
                 <td>
@@ -79,27 +105,32 @@ function OperationalArea() {
             ))}
           </tbody>
         </table>
-        <section className="align-baseline d-flex justify-content-end">
-          <Pagination
-            activePage={currentPage}
-            itemsCountPerPage={10}
-            totalItemsCount={100}
-            pageRangeDisplayed={2}
-            itemClass="page-item"
-            linkClass="page-link"
-            onChange={handlePageChange.bind(this)}
-          />
-        </section>
-
-        <div className="align-baseline d-flex justify-content-end">
-          <div className="btn-group">
-            <Link
-              to="/area/register"
-              type="button"
-              className="btn btn-secondary btn-sm"
-            >
-              <BsFillPlusCircleFill size={16} color="#FFF" /> Adicionar
-            </Link>
+        <div className="row">
+          <div className="col">
+            <section className="align-baseline d-flex justify-content-start">
+              <Pagination
+                activePage={currentPage}
+                itemsCountPerPage={5}
+                totalItemsCount={totalItens || 1}
+                pageRangeDisplayed={2}
+                itemClass="page-item"
+                linkClass="page-link"
+                onChange={handlePageChange.bind(this)}
+              />
+            </section>
+          </div>
+          <div className="col">
+            <div className="align-baseline d-flex justify-content-end">
+              <div className="btn-group">
+                <Link
+                  to="/area/register"
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                >
+                  <BsFillPlusCircleFill size={16} color="#FFF" /> Adicionar
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
