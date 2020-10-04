@@ -76,7 +76,11 @@ routes.post('/parameter', AuthMiddleware, ParameterController.store);
 routes.put('/parameter/:id', AuthMiddleware, ParameterController.update);
 routes.delete('/parameter/:id', AuthMiddleware, ParameterController.delete);
 
-routes.get('/consumption', AuthMiddleware, ConsumptionController.index);
+routes.get(
+  '/consumption/:page?/:pageSize?',
+  AuthMiddleware,
+  ConsumptionController.index
+);
 routes.get('/dashboard', AuthMiddleware, DashboardController.index);
 routes.post(
   '/dashboard/getPowerData',

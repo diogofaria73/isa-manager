@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { format, parseISO } from 'date-fns';
+import Pagination from 'react-js-pagination';
 import Title from '../../components/Title';
 import api from '~/services/api';
 
 export default function Consumption() {
   const [consumptions, setConsumption] = useState([]);
+  const [currentPage, setCurrentPage] = useState();
+  const [totalItens, setTotalItens] = useState();
+  const [itemsPerPage] = useState(10);
 
   useEffect(() => {
     async function loadConsumption() {
@@ -14,6 +18,12 @@ export default function Consumption() {
     }
     loadConsumption();
   }, []);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    // console.log(`${currentPage} atual`);
+    // getPage(page, areas);
+  };
 
   return (
     <div className="mt-4">
@@ -41,6 +51,17 @@ export default function Consumption() {
             ))}
           </tbody>
         </table>
+      </section>
+      <section className="align-baseline d-flex justify-content-start">
+        <Pagination
+          activePage={currentPage}
+          itemsCountPerPage={itemsPerPage}
+          totalItemsCount={totalItens || 1}
+          pageRangeDisplayed={2}
+          itemClass="page-item"
+          linkClass="page-link"
+          onChange={handlePageChange.bind(this)}
+        />
       </section>
     </div>
   );
