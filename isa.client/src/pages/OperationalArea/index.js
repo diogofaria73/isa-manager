@@ -62,7 +62,6 @@ function OperationalArea() {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    // console.log(`${currentPage} atual`);
     getPage(page, areas);
   };
 
