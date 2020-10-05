@@ -13,7 +13,7 @@ registerLocale('pt-BR', ptBR);
 
 export default function Consumption() {
   const [consumptions, setConsumption] = useState([]);
-  const [currentPage, setCurrentPage] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
   const [totalItens, setTotalItens] = useState();
   const [pageSize] = useState(10);
   const [startDate, setStartDate] = useState();

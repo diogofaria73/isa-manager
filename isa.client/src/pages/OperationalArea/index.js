@@ -10,7 +10,7 @@ import history from '~/services/history';
 function OperationalArea() {
   const [areas, setAreas] = useState([]);
   const [areasPaged, setAreasPaged] = useState([]);
-  const [currentPage, setCurrentPage] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
   const [totalItens, setTotalItens] = useState();
   const [itemsPerPage] = useState(10);
 
@@ -33,26 +33,24 @@ function OperationalArea() {
 
   useEffect(() => {
     async function loadAreas() {
-      const response = await (await api.get('/operationalArea')).data.areas;
-
-      setTotalItens(response.length);
-      setAreas(response);
-      if (currentPage === undefined) {
-        setCurrentPage(1);
-        const pagedList = [];
-        const startIndex = 0;
-        let endIndex = itemsPerPage - 1;
-        if (endIndex >= areas.length) {
-          endIndex = areas.length - 1;
-        }
-        for (let i = startIndex; i <= endIndex; i += 1) {
-          pagedList.push(areas[i]);
-        }
-        setAreasPaged(pagedList);
+      const response = await api.get('/operationalArea');
+      const data = response.data.areas;
+      setTotalItens(data.length);
+      setAreas(data);
+      const pagedList = [];
+      const startIndex = 0;
+      let endIndex = itemsPerPage - 1;
+      if (endIndex >= data.length) {
+        endIndex = data.length - 1;
       }
+      for (let i = startIndex; i <= endIndex; i += 1) {
+        pagedList.push(data[i]);
+      }
+      setAreasPaged(pagedList);
     }
+
     loadAreas();
-  }, [totalItens, currentPage, areas, itemsPerPage]);
+  }, [itemsPerPage]);
 
   const startEdit = (id) => {
     history.push(`/area/edit/${id}`);
