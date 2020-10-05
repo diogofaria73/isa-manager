@@ -39,11 +39,20 @@ function OperationalArea() {
       setAreas(response);
       if (currentPage === undefined) {
         setCurrentPage(1);
-        getPage(currentPage, response);
+        const pagedList = [];
+        const startIndex = 0;
+        let endIndex = itemsPerPage - 1;
+        if (endIndex >= areas.length) {
+          endIndex = areas.length - 1;
+        }
+        for (let i = startIndex; i <= endIndex; i += 1) {
+          pagedList.push(areas[i]);
+        }
+        setAreasPaged(pagedList);
       }
     }
     loadAreas();
-  }, [totalItens, currentPage]);
+  }, [totalItens, currentPage, areas, itemsPerPage]);
 
   const startEdit = (id) => {
     history.push(`/area/edit/${id}`);

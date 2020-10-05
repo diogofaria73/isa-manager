@@ -77,7 +77,7 @@ routes.put('/parameter/:id', AuthMiddleware, ParameterController.update);
 routes.delete('/parameter/:id', AuthMiddleware, ParameterController.delete);
 
 routes.get(
-  '/consumption/:page?/:pageSize?',
+  '/consumption/:page?/:pageSize?/:startDate?/:endDate?',
   AuthMiddleware,
   ConsumptionController.index
 );
