@@ -18,6 +18,7 @@ export default function Consumption() {
   const [pageSize] = useState(10);
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
+  const [tag, setTag] = useState();
 
   useEffect(() => {
     async function loadConsumption() {
@@ -33,13 +34,15 @@ export default function Consumption() {
     let response;
     if (
       startDate !== undefined &&
-      startDate != null &&
+      startDate !== null &&
       endDate !== undefined &&
-      endDate != null
+      endDate !== null
     ) {
       response = await api.get(
-        `consumption/${page}/${pageSize}/${startDate}/${endDate}`
+        `consumption/${page}/${pageSize}/${tag}/${startDate}/${endDate}`
       );
+    } else if (tag !== undefined) {
+      response = await api.get(`consumption/${page}/${pageSize}/${tag}`);
     } else {
       response = await api.get(`consumption/${page}/${pageSize}`);
     }
@@ -57,13 +60,29 @@ export default function Consumption() {
     getPageData(1);
   };
 
+  const handleChange = (event) => {
+    if (event.target.value === '') {
+      setTag(undefined);
+    } else {
+      setTag(event.target.value);
+    }
+  };
+
   return (
     <div className="mt-4">
       <Title titulo="Histórico de Consumo:" />
       <Form className="mt-4" onSubmit={handleSubmit}>
         <div className="card">
           <div className="card-body">
-            <div className="row mt-3 align-items-center">
+            <div className="row mt-2 align-items-center">
+              <div className="col">
+                <h6>Tag:</h6>
+                <input
+                  className="form-control"
+                  id="tagName"
+                  onChange={handleChange}
+                />
+              </div>
               <div className="col">
                 <h6>Data Inicial:</h6>
                 <DatePicker

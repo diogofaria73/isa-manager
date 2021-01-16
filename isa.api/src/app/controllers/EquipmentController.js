@@ -6,6 +6,7 @@ import EquipmentType from '../models/EquipmentType';
 class EquipmentController {
   async index(req, res) {
     const equipmentList = await Equipment.findAll({
+      order: [['name', 'asc']],
       include: [
         {
           model: OperationalArea,

@@ -7,6 +7,8 @@ class ConsumptionController {
     const op = Sequelize.Op;
     let page = 1;
     let pageSize = 10;
+
+    const { tag } = req.params;
     const start = req.params.startDate;
     let end = req.params.endDate;
     if (req.params.page !== undefined) {
@@ -17,27 +19,56 @@ class ConsumptionController {
     }
 
     let data;
-    if (start === undefined || end === undefined) {
-      data = await Consumption.findAndCountAll({
-        limit: pageSize,
-        offset: (page - 1) * pageSize,
-        order: [['updatedAt', 'desc']],
-      });
+    if (start === undefined && end === undefined) {
+      if (tag === undefined) {
+        data = await Consumption.findAndCountAll({
+          limit: pageSize,
+          offset: (page - 1) * pageSize,
+          order: [['createdAt', 'desc']],
+        });
+      } else {
+        data = await Consumption.findAndCountAll({
+          limit: pageSize,
+          offset: (page - 1) * pageSize,
+          order: [['createdAt', 'desc']],
+          where: {
+            plcTag: {
+              [op.substring]: [tag],
+            },
+          },
+        });
+      }
     } else {
       end = new Date(end);
       end.setHours(23);
       end.setMinutes(59);
       end.setSeconds(59);
-      data = await Consumption.findAndCountAll({
-        limit: pageSize,
-        offset: (page - 1) * pageSize,
-        order: [['updatedAt', 'desc']],
-        where: {
-          updatedAt: {
-            [op.between]: [start, end],
+      if (tag === undefined || tag === 'undefined') {
+        data = await Consumption.findAndCountAll({
+          limit: pageSize,
+          offset: (page - 1) * pageSize,
+          order: [['createdAt', 'desc']],
+          where: {
+            createdAt: {
+              [op.between]: [start, end],
+            },
           },
-        },
-      });
+        });
+      } else {
+        data = await Consumption.findAndCountAll({
+          limit: pageSize,
+          offset: (page - 1) * pageSize,
+          order: [['createdAt', 'desc']],
+          where: {
+            createdAt: {
+              [op.between]: [start, end],
+            },
+            plcTag: {
+              [op.substring]: [tag],
+            },
+          },
+        });
+      }
     }
     const consumptionList = data.rows;
     const consumptionTotal = data.count;

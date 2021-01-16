@@ -37,7 +37,7 @@ export default function ParameterDelete(props) {
         initialData={parameter}
         className="mt-5"
       >
-        <h3>Excluir Área Operacional</h3>
+        <h3>Excluir Parâmetro</h3>
         <div className="row-cols mt-3">
           <Input className="form-control" name="id" type="hidden" />
           <p>Nome:</p>
