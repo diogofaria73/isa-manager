@@ -8,11 +8,13 @@ export default function Graph() {
   const [powerJs, setPowerJs] = useState([]);
 
   useEffect(() => {
+    // Chamada para preencher o gráfico na app do google. Não funciona sem internet;
     async function loadPowerData() {
       const response = await api.post('dashboard/getPowerData');
       const data = response.data.powerData;
       setPower(data);
     }
+    // Chamada para preencher os gráficos quando a página é carregada;
     async function loadDataChartsJs() {
       const response = await api.post('dashboard/getDataChartJs');
       const dataChartJs = {
@@ -28,7 +30,8 @@ export default function Graph() {
           {
             label: 'Custo',
             data: response.data.costs,
-            fill: false,
+            fill: true,
+            backgroundColor: 'rgba(45,15,45,0.2)',
             borderColor: '#742774',
           },
         ],

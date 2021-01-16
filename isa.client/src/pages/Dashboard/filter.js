@@ -38,7 +38,8 @@ export default function DashboardFilter() {
     const selData = {
       operational_area_id: '0',
       equipment_type_id: '0',
-    }
+      equipment_id: '0',
+    };
     setSelStatus(selData);
   }, []);
 
@@ -62,21 +63,43 @@ export default function DashboardFilter() {
       equipment_type_id: e.target.value,
     };
     setSelStatus(data);
-    async function loadEquipmentsByArea() {
+    async function loadEquipmentsByType() {
       const response = await api.post('equipment/findByAreaAndType', data);
       const list = response.data.equipmentList;
       setEquipments(list);
     }
-    loadEquipmentsByArea();
+    loadEquipmentsByType();
   }
 
-  // handleSubmit(event) {
-  // alert('xxxxxxx: ' + this.state.value);
-  // event.preventDefault();
-  // }
+  function changeEquipment(e) {
+    const data = {
+      operational_area_id: selStatus.operational_area_id,
+      equipment_type_id: selStatus.equipment_type_id,
+      equipment_id: e.target.value,
+    };
+    setSelStatus(data);
+  }
+
+  // Função de chamada com os dados do filtro;
+  function handleSubmit() {
+    const data = {
+      operational_area_id: selStatus.operational_area_id,
+      equipment_type_id: selStatus.equipment_type_id,
+      equipment_id: selStatus.equipment_id,
+      start_date: startDate,
+      end_date: endDate,
+    };
+    setSelStatus(data);
+    async function loadDataByFilter() {
+      const response = await api.post('dashboard/getDataChartJsByFilter', data);
+      console.log(response);
+      //TODO - Popular os gráficos;
+    }
+    loadDataByFilter();
+  }
 
   return (
-    <Form className="mt-4">
+    <Form onSubmit={handleSubmit} className="mt-4">
       <div className="card">
         <div className="card-body">
           <div className="row">
@@ -104,7 +127,7 @@ export default function DashboardFilter() {
             </div>
             <div className="col">
               <h6>Equipamentos: </h6>
-              <select className="form-control">
+              <select className="form-control" onChange={changeEquipment}>
                 <option value="0">Todos</option>
                 {equipments.map((equipment) => (
                   <option key={equipment.id} value={equipment.id}>
@@ -137,7 +160,7 @@ export default function DashboardFilter() {
             </div>
             <div className="col">
               <div className="btn-group">
-                <button type="button" className="btn btn-secondary btn-sm">
+                <button type="submit" className="btn btn-secondary btn-sm">
                   <BsSearch size={12} color="#FFF" /> Buscar
                 </button>
               </div>

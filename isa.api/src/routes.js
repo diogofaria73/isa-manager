@@ -92,4 +92,9 @@ routes.post(
   AuthMiddleware,
   DashboardController.getDataChartJs
 );
+routes.post(
+  '/dashboard/getDataChartJsByFilter',
+  AuthMiddleware,
+  DashboardController.getDataChartJsByFilter
+);
 export default routes;
