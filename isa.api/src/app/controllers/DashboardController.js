@@ -1,8 +1,10 @@
+import { QueryTypes } from 'sequelize';
 import OperationalArea from '../models/OperationalArea';
 import EquipmentType from '../models/EquipmentType';
 import Equipment from '../models/Equipment';
 import Consumption from '../models/Consumption';
-import { QueryTypes } from 'sequelize';
+
+const ExcelJS = require('exceljs');
 
 class DashboardController {
   // Exibição da tela inicial de Dashboard.
@@ -27,19 +29,22 @@ class DashboardController {
     });
   }
 
-  // Método de teste para jogar dados para o gráfico da tela do dashboard - app do Google.
-  async getPowerData(req, res) {
-    const powerData = [['Equipamento', 'Potência', 'Custo']];
+  // Método para exportar para Excel
+  async getExcelData(req, res) {
+    const labels = [];
+    const workbook = new ExcelJS.Workbook();
+    workbook.creator = 'ISA';
+    workbook.addWorksheet('Planilha');
 
     const equipmentList = await Equipment.findAll({
       order: [['tag', 'asc']],
     });
     equipmentList.forEach(eqp => {
-      powerData.push([eqp.tag, Math.random() * 100, Math.random() * 100]);
+      labels.push([eqp.tag, Math.random() * 100, Math.random() * 100]);
     });
 
     return res.status(200).json({
-      powerData,
+      labels,
     });
   }
 

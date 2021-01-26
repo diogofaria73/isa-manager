@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { BsSearch } from 'react-icons/bs';
 import { Line, Bar, Pie, HorizontalBar } from 'react-chartjs-2';
+import { Form } from '@rocketseat/unform';
 import api from '../../services/api';
 
 export default function Graph() {
@@ -88,6 +90,16 @@ export default function Graph() {
     loadDataChartsJs();
   }, []);
 
+// Função de chamada com os dados do filtro;
+  function handleSubmit() {
+    async function exportExcelData() {
+      const response = await api.post('dashboard/getExcelData');
+      console.log(response);
+      //TODO - Popular os gráficos;
+    }
+    exportExcelData();
+  }
+
   return (
     <>
       <div className="row mt-5">
@@ -109,6 +121,20 @@ export default function Graph() {
           <h6 className="text-center">Potência - Pizza ChartJs</h6>
           <Pie data={chartPie} />
         </div>
+      </div>
+      <Form onSubmit={handleSubmit} className="mt-4">
+        <div className="row mt-5">
+          <div className="col">
+            <div align="right">
+              <button type="submit" className="btn btn-secondary btn-sm">
+                <BsSearch size={12} color="#FFF" /> Exportar
+              </button>
+            </div>
+          </div>
+        </div>
+      </Form>
+      <div className="row mt-3">
+        <div className="col" />
       </div>
     </>
   );

@@ -83,9 +83,9 @@ routes.get(
 );
 routes.get('/dashboard', AuthMiddleware, DashboardController.index);
 routes.post(
-  '/dashboard/getPowerData',
+  '/dashboard/getExcelData',
   AuthMiddleware,
-  DashboardController.getPowerData
+  DashboardController.getExcelData
 );
 routes.post(
   '/dashboard/getDataChartJs',
