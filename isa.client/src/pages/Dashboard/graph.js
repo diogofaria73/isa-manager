@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import { Line, Bar, Pie, HorizontalBar } from 'react-chartjs-2';
 import { Form } from '@rocketseat/unform';
+// import { saveAs } from 'file-saver';
 import api from '../../services/api';
 
 export default function Graph() {
@@ -90,12 +91,14 @@ export default function Graph() {
     loadDataChartsJs();
   }, []);
 
-// Função de chamada com os dados do filtro;
+  // Função de chamada para exportar dados para Excel;
   function handleSubmit() {
     async function exportExcelData() {
       const response = await api.post('dashboard/getExcelData');
       console.log(response);
-      //TODO - Popular os gráficos;
+      //const blob = new Blob([response.data], { type: 'applicationi/xlsx' });
+      //saveAs(blob, 'meuExcel.xlsx');
+      // TODO - Salvar o arquivo .xlsx;
     }
     exportExcelData();
   }

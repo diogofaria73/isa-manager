@@ -31,20 +31,38 @@ class DashboardController {
 
   // Método para exportar para Excel
   async getExcelData(req, res) {
-    const labels = [];
+    const eqps = [];
     const workbook = new ExcelJS.Workbook();
     workbook.creator = 'ISA';
-    workbook.addWorksheet('Planilha');
+    const sheet = workbook.addWorksheet('Plan_Consumo');
 
     const equipmentList = await Equipment.findAll({
       order: [['tag', 'asc']],
     });
     equipmentList.forEach(eqp => {
-      labels.push([eqp.tag, Math.random() * 100, Math.random() * 100]);
+      eqps.push({
+        tag: eqp.tag,
+        consumo: Math.random() * 100,
+        preço: Math.random() * 100,
+      });
     });
 
-    return res.status(200).json({
-      labels,
+    sheet.columns = [
+      { header: 'Tag', key: 'tag', width: 25 },
+      { header: 'Consumo', key: 'consumo', width: 25 },
+      { header: 'Preço', key: 'preco', width: 25 },
+    ];
+
+    sheet.addRows(eqps);
+
+    res.setHeader(
+      'Content-Type',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    );
+    res.setHeader('Content-Disposition', 'attachment; filename=tutorials.xlsx');
+
+    return workbook.xlsx.write(res).then(function() {
+      res.status(200).end();
     });
   }
 
